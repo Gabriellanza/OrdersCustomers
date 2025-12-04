@@ -7,7 +7,7 @@ namespace OrdersCustomers.Infra.Data.Mappings;
 public class ClienteMap : EntityMapBase<Cliente>
 {
     public override void Configure(EntityTypeBuilder<Cliente> entity)
-    {
+    { 
         base.Configure(entity);
 
         entity.ToTable("cliente");
