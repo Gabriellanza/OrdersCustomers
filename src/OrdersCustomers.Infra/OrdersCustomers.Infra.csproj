@@ -3,7 +3,21 @@
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>enable</Nullable>
   </PropertyGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\Context\" />
+    <Folder Include="Data\Procedures\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.22" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="8.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OrdersCustomers.Domain\OrdersCustomers.Domain.csproj" />
+  </ItemGroup>
 
 </Project>
