@@ -1,10 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using FluentValidation;
-using OrdersCustomers.Domain.Interfaces;
+using OrdersCustomers.Domain.Interfaces.Comum;
 using ValidationResult = FluentValidation.Results.ValidationResult;
 
-namespace OrdersCustomers.Domain.ValueObjects;
+namespace OrdersCustomers.Domain.Entities.Comum;
 
 public abstract class EntityBase : IModelValidator
 {
@@ -34,7 +34,7 @@ public abstract class EntityBase : IModelValidator
 
     public bool Validate<TModel>(TModel model, AbstractValidator<TModel> validator)
     {
-         ValidationResult = validator.Validate(model);
+        ValidationResult = validator.Validate(model);
         return ValidationResult.IsValid;
     }
 

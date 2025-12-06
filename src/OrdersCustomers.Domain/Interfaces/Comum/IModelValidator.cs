@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using FluentValidation.Results;
 
-namespace OrdersCustomers.Domain.Interfaces;
+namespace OrdersCustomers.Domain.Interfaces.Comum;
 
 public interface IModelValidator
 {

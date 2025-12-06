@@ -1,4 +1,4 @@
-﻿using OrdersCustomers.Domain.ValueObjects;
+﻿using OrdersCustomers.Domain.Entities.Comum;
 
 namespace OrdersCustomers.Domain.Entities;
 

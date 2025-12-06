@@ -1,13 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore.Query;
-using OrdersCustomers.Domain.ValueObjects;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+using OrdersCustomers.Domain.Entities.Comum;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace OrdersCustomers.Domain.Interfaces;
+namespace OrdersCustomers.Domain.Interfaces.Comum;
 
 public interface IRepository<TEntity> : IDisposable where TEntity : EntityBase
 {
@@ -35,7 +30,7 @@ public interface IRepository<TEntity> : IDisposable where TEntity : EntityBase
     /// <param name="useSplitQuery">A function to enable/disable splitQuery</param>
     /// <returns>An <see><cref>{TEntity}</cref></see> that contains elements that satisfy the condition specified by <paramref name="predicate"/>.</returns>
     /// <remarks>This method default no-tracking query.</remarks>
-    TEntity GetSingle(Expression<Func<TEntity, bool>>? predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, Expression<Func<TEntity, TEntity>>? selector = null, bool disableTracking = true, int? take = null, int? skip = null, bool useSplitQuery = true);
+    TEntity GetSingle(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, Expression<Func<TEntity, TEntity>> selector = null, bool disableTracking = true, int? take = null, int? skip = null, bool useSplitQuery = true);
 
     /// <summary>
     /// Gets list entity based on a predicate, orderby delegate and include delegate. This method default no-tracking query.
@@ -50,7 +45,7 @@ public interface IRepository<TEntity> : IDisposable where TEntity : EntityBase
     /// <param name="useSplitQuery">A function to enable/disable splitQuery</param>
     /// <returns>An <see cref="IEnumerable{TEntity}"/> that contains elements that satisfy the condition specified by <paramref name="predicate"/>.</returns>
     /// <remarks>This method default no-tracking query.</remarks>
-    IEnumerable<TEntity> GetList(Expression<Func<TEntity, bool>>? predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, Expression<Func<TEntity, TEntity>>? selector = null, bool disableTracking = true, int? take = null, int? skip = null, bool useSplitQuery = true);
+    IEnumerable<TEntity> GetList(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, Expression<Func<TEntity, TEntity>> selector = null, bool disableTracking = true, int? take = null, int? skip = null, bool useSplitQuery = true);
 
     /// <summary>
     /// Gets list entity based on a predicate, orderby delegate and include delegate. This method default no-tracking query.
@@ -65,6 +60,6 @@ public interface IRepository<TEntity> : IDisposable where TEntity : EntityBase
     /// <param name="useSplitQuery">A function to enable/disable splitQuery</param>
     /// <returns>An <see cref="IQueryable{TEntity}"/> that contains elements that satisfy the condition specified by <paramref name="predicate"/>.</returns>
     /// <remarks>This method default no-tracking query.</remarks>
-    IQueryable<TEntity> GetListQuery(Expression<Func<TEntity, bool>>? predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, Expression<Func<TEntity, TEntity>>? selector = null, bool disableTracking = true, int? take = null, int? skip = null, bool useSplitQuery = true);
+    IQueryable<TEntity> GetListQuery(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, Expression<Func<TEntity, TEntity>> selector = null, bool disableTracking = true, int? take = null, int? skip = null, bool useSplitQuery = true);
 
 }
