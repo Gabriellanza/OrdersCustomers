@@ -1,0 +1,31 @@
+services:
+  api:
+    container_name: OrdersCustomers
+    build:
+      context: .
+      dockerfile: src/OrdersCustomers/Dockerfile
+    ports:
+      - "5000:8080"
+    depends_on:
+      - postgres
+    environment:
+      ASPNETCORE_ENVIRONMENT: "Development"
+
+      # Connection String do PostgreSQL dentro da rede Docker
+      ConnectionStrings__DefaultConnection: "Host=postgres;Port=5432;Database=meubanco;Username=postgres;Password=postgres"
+
+  postgres:
+    container_name: meu_postgres
+    image: postgres:16
+    restart: always
+    ports:
+      - "5433:5432"
+    environment:
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: OrdersCustomers
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.9.34622.214
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrdersCustomers.API", "OrdersCustomers.API.csproj", "{CA20D36E-EBE2-4349-AABE-6368C8E758EC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrdersCustomers", "OrdersCustomers.csproj", "{CA20D36E-EBE2-4349-AABE-6368C8E758EC}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrdersCustomers.DTO", "..\OrdersCustomers.DTO\OrdersCustomers.DTO.csproj", "{18A41800-7E58-44D6-AEA3-4948E7B0185B}"
 EndProject
@@ -11,17 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrdersCustomers.Infra", "..
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrdersCustomers.Worker", "..\OrdersCustomers.Worker\OrdersCustomers.Worker.csproj", "{CC5D1CF6-F736-40DB-BE86-D418F5B87E17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrdersCustomers.Domain", "..\OrdersCustomers.Domain\OrdersCustomers.Domain.csproj", "{0B460B4D-0D97-4710-8068-5CCBEC553755}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrdersCustomers.Domain", "..\OrdersCustomers.Domain\OrdersCustomers.Domain.csproj", "{0B460B4D-0D97-4710-8068-5CCBEC553755}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrdersCustomers.Application", "..\OrdersCustomers.Application\OrdersCustomers.Application.csproj", "{7421683A-30DC-4C33-A7FD-8475C8C4D10C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrdersCustomers.Application", "..\OrdersCustomers.Application\OrdersCustomers.Application.csproj", "{7421683A-30DC-4C33-A7FD-8475C8C4D10C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F6883A05-C3ED-48D8-8D96-EF25783136C9}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{FB12A6F7-C2DA-46FC-97D7-75773A5C53A6}"
-	ProjectSection(SolutionItems) = preProject
-		.dockerignore = .dockerignore
-		Dockerfile = Dockerfile
-	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

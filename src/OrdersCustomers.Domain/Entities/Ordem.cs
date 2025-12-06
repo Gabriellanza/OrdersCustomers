@@ -26,15 +26,13 @@ public class Ordem : EntityBase
 
     #endregion
 
-    public Ordem(long numeroOrdem, Guid clienteId, Cliente cliente, DateTime dataCriacao, OrdemStatus status, decimal valorTotal, List<ItemOrdem> itens, DateTime? dataConclusao)
+    public Ordem(long numeroOrdem, Guid clienteId, DateTime dataCriacao, OrdemStatus status, decimal valorTotal, DateTime? dataConclusao)
     {
         NumeroOrdem = numeroOrdem;
-        Cliente = cliente;
         DataCriacao = dataCriacao;
         Status = status;
         ValorTotal = valorTotal;
         ClienteId = clienteId;
-        Itens = itens;
         DataConclusao = dataConclusao;
     }
 

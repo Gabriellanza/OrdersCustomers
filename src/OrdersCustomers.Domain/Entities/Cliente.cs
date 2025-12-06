@@ -16,13 +16,12 @@ public class Cliente : EntityBase
 
     public IEnumerable<Endereco> EnderecoList { get; private set; }
 
-    public Cliente(string cpfCnpj, string nome, string email, string telefone, string celular, IEnumerable<Endereco> enderecoList)
+    public Cliente(string cpfCnpj, string nome, string email, string telefone, string celular)
     {
         CpfCnpj = cpfCnpj;
         Nome = nome;
         Email = email;
         Telefone = telefone;
         Celular = celular;
-        EnderecoList = enderecoList;
     }
 }
