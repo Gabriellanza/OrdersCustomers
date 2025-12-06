@@ -12,8 +12,7 @@ public static class ApiConfigurations
 {
     public static void AddConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
-        DependencyInjectorRepository.Register(services, configuration);
-
+        InjectorBootstrap.RegisterServices(services, configuration);
 
         services.AddCors(options =>
         {

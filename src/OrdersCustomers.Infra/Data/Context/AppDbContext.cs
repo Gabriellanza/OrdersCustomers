@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OrdersCustomers.Domain.Entities;
-using OrdersCustomers.Domain.ValueObjects;
 
 namespace OrdersCustomers.Infra.Data.Context;
 

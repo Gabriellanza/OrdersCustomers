@@ -1,9 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.EntityFrameworkCore;
-using OrdersCustomers.Domain.ValueObjects;
 using System.Linq.Expressions;
-using OrdersCustomers.Domain.Interfaces;
 using OrdersCustomers.Infra.Data.Context;
+using OrdersCustomers.Domain.Entities.Comum;
+using OrdersCustomers.Domain.Interfaces.Comum;
 
 namespace OrdersCustomers.Infra.Data.Repository;
 

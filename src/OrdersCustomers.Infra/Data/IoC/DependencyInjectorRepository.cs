@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using OrdersCustomers.Domain.Interfaces;
+using OrdersCustomers.Domain.Interfaces.Comum;
 using OrdersCustomers.Infra.Data.Context;
 using OrdersCustomers.Infra.Data.Repository;
 

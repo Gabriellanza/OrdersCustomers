@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using OrdersCustomers.Domain.ValueObjects;
+using OrdersCustomers.Domain.Entities.Comum;
 
 namespace OrdersCustomers.Infra.Data.Mappings;
 
