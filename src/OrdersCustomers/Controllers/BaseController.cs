@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OrdersCustomers.Application.Interfaces.Comum;
 using OrdersCustomers.Application.ViewModels;
 using OrdersCustomers.Domain.Entities.Comum;
-using OrdersCustomers.Domain.Interfaces.Comum;
 
 namespace OrdersCustomers.Controllers;
 
