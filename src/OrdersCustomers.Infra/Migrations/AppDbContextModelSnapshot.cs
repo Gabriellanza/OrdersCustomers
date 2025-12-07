@@ -322,7 +322,7 @@ namespace OrdersCustomers.Infra.Migrations
             modelBuilder.Entity("OrdersCustomers.Domain.Entities.Endereco", b =>
                 {
                     b.HasOne("OrdersCustomers.Domain.Entities.Cliente", null)
-                        .WithMany("EnderecoList")
+                        .WithMany("Endereco")
                         .HasForeignKey("ClienteId");
                 });
 
@@ -348,7 +348,7 @@ namespace OrdersCustomers.Infra.Migrations
 
             modelBuilder.Entity("OrdersCustomers.Domain.Entities.Cliente", b =>
                 {
-                    b.Navigation("EnderecoList");
+                    b.Navigation("Endereco");
                 });
 
             modelBuilder.Entity("OrdersCustomers.Domain.Entities.Ordem", b =>

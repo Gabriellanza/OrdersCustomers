@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using System.Linq.Expressions;
 using OrdersCustomers.Infra.Data.Context;
 using OrdersCustomers.Domain.Entities.Comum;
-using OrdersCustomers.Domain.Interfaces.Comum;
+using OrdersCustomers.Domain.Interfaces;
 
 namespace OrdersCustomers.Infra.Data.Repository;
 
@@ -26,19 +26,12 @@ public class RepositoryBase<TEntity> : IRepository<TEntity> where TEntity : Enti
 
     public virtual void Add(TEntity entity)
     {
-        _dbContext.Entry(entity).State = EntityState.Added;
+        _dbContext.Add(entity);
     }
 
-    public virtual void Update(TEntity entity)
+    public void Update(TEntity entity)
     {
-        if (_dbContext.ChangeTracker.Entries().FirstOrDefault(x => x.Entity.Equals(entity)) != null)
-        {
-            _dbContext.Entry(entity).CurrentValues.SetValues(entity);
-        }
-        else
-        {
-            _dbContext.Entry(entity).State = EntityState.Modified;
-        }
+        _dbContext.Update(entity);
     }
 
     public virtual void Update(TEntity entityExists, TEntity entity)

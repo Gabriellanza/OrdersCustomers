@@ -18,7 +18,7 @@ public class ClienteMap : EntityMapBase<Cliente>
         entity.Property(x => x.Telefone).HasColumnName("telefone").HasMaxLength(20).IsRequired(false);
         entity.Property(x => x.Celular).HasColumnName("celular").HasMaxLength(20).IsRequired(false);
 
-        entity.HasMany(x => x.EnderecoList).WithOne().HasForeignKey(x => x.ClienteId).IsRequired(false);
+        entity.HasOne(x => x.Endereco).WithOne(x => x.Cliente).HasForeignKey<Endereco>(x => x.ClienteId).IsRequired(false);
 
         entity.HasIndex(x => x.CpfCnpj).HasDatabaseName("cliente_cpf_cnpj_idx").IsUnique();
         entity.HasIndex(x => x.Nome).HasDatabaseName("cliente_nome_idx");
