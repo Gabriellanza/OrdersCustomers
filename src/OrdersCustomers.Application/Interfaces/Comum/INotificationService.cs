@@ -1,6 +1,6 @@
 ﻿using OrdersCustomers.Domain.Entities.Comum;
 
-namespace OrdersCustomers.Domain.Interfaces.Comum;
+namespace OrdersCustomers.Application.Interfaces.Comum;
 
 public interface INotificationService : IDisposable
 {
@@ -8,7 +8,7 @@ public interface INotificationService : IDisposable
 
     void NewNotification(string key, string message, NotificationType type);
 
-    void NotificationErrors<TEntity>(TEntity model) where TEntity : IModelValidator;
+    void NotificationErrors<TEntity>(TEntity model);
 
     IEnumerable<Notification> GetNotifications();
 

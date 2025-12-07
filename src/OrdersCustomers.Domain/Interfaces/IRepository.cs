@@ -2,7 +2,7 @@
 using OrdersCustomers.Domain.Entities.Comum;
 using System.Linq.Expressions;
 
-namespace OrdersCustomers.Domain.Interfaces.Comum;
+namespace OrdersCustomers.Domain.Interfaces;
 
 public interface IRepository<TEntity> : IDisposable where TEntity : EntityBase
 {

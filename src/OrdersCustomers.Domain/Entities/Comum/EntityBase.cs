@@ -1,7 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.Runtime.Serialization;
 using FluentValidation;
-using OrdersCustomers.Domain.Interfaces.Comum;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Metadata;
 using ValidationResult = FluentValidation.Results.ValidationResult;
 
 namespace OrdersCustomers.Domain.Entities.Comum;
@@ -19,6 +22,20 @@ public abstract class EntityBase : IModelValidator
     public DateTime DataCriacao { get; protected set; }
 
     public DateTime? DataAtualizacao { get; protected set; }
+
+    protected EntityBase()
+    {
+        Id = Guid.NewGuid();
+        DataCriacao = DateTime.UtcNow;
+        Ativo = true;
+    }
+
+    protected EntityBase(Guid id)
+    {
+        Id = id;
+        DataCriacao = DateTime.UtcNow;
+        Ativo = true;
+    }
 
     #region Validation
 
@@ -38,6 +55,12 @@ public abstract class EntityBase : IModelValidator
         return ValidationResult.IsValid;
     }
 
+    public void Validate(IModel model, IDiagnosticsLogger<DbLoggerCategory.Model.Validation> logger)
+    {
+        throw new NotImplementedException();
+    }
+
     #endregion
+
 
 }

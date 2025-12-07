@@ -1,21 +1,180 @@
-﻿using OrdersCustomers.Application.Services.Comum;
+﻿using System.Linq.Expressions;
+using LinqKit;
+using Microsoft.EntityFrameworkCore;
+using OrdersCustomers.Application.DTOs.Cliente;
+using OrdersCustomers.Application.DTOs.Endereco;
+using OrdersCustomers.Application.Interfaces;
+using OrdersCustomers.Application.Mappers;
+using OrdersCustomers.Application.Services.Comum;
 using OrdersCustomers.Domain.Entities;
+using OrdersCustomers.Domain.Entities.Comum;
 using OrdersCustomers.Domain.Interfaces;
-using OrdersCustomers.Domain.Interfaces.Comum;
 
 namespace OrdersCustomers.Application.Services;
 
 public class ClienteService : ServiceBase<Cliente>, IClienteService
 {
-    public ClienteService(IServiceProvider serviceProvider, IRepository<Cliente> repoBase) : base(serviceProvider, repoBase)
+    private readonly IEnderecoService _enderecoService;
+
+    public ClienteService(IServiceProvider serviceProvider, IRepository<Cliente> repoBase, IEnderecoService enderecoService) : base(serviceProvider, repoBase)
     {
+        _enderecoService = enderecoService;
     }
 
-    public async Task<IEnumerable<Cliente>> Listar()
+    public async Task<Cliente> ObterPorId(Guid id)
     {
-        var clienteList = await GetList();
+        if (id == Guid.Empty)
+        {
+            NewNotification("Cliente", "Necessário id do cliente para a Busca");
+            return null;
+        }
 
-        return clienteList;
+        var cliente = await GetSingle(x => x.Id == id && x.Ativo, include: query => query
+                .Include(x => x.Endereco));
+
+        if (cliente is null)
+        {
+            NewNotification("Cliente", "Cliente não encontrado");
+            return null;
+        }
+
+        return cliente;
     }
+
+    public async Task<IEnumerable<ClienteDto>> ListarTodos()
+    {
+        var clienteList = await GetList(x => x.Ativo, include: query => query
+            .Include(x => x.Endereco));
+
+        return clienteList.ToList().ToApiResponse();
+    }
+
+    public async Task<ClienteDto> Inativar(Guid id)
+    {
+        var cliente = await ObterPorId(id);
+
+        cliente.Inativar(GetAuthUserId());
+
+        cliente = Update(cliente);
+
+        if (await Commit() == false)
+            return null;
+
+        NewNotification("Cliente", "Cliente foi inativado!", NotificationType.Information);
+
+        return cliente.ToApiResponse();
+    }
+
+    public async Task<ClienteDto> Criar(ClienteCreateDto clienteDto)
+    {
+        if (await ValidarCriacaoCliente(clienteDto) == false)
+            return null;
+
+        var cliente = Cliente.Novo(clienteDto.CpfCnpj, clienteDto.Nome, clienteDto.Email, clienteDto.Telefone,
+                                    clienteDto.Celular, GetAuthUserId());
+
+        cliente.Endereco = Endereco.Novo(clienteDto.Endereco?.Cep, clienteDto.Endereco?.Logradouro, clienteDto.Endereco?.Numero,
+            clienteDto.Endereco?.Bairro, clienteDto.Endereco?.Cidade, clienteDto.Endereco?.Estado, GetAuthUserId());
+
+        cliente = Add(cliente);
+
+        if (await Commit() == false)
+            return null;
+
+        return cliente.ToApiResponse();
+    }
+
+
+    public async Task<ClienteDto> Alterar(ClienteAlterDto clienteDto)
+    {
+        var cliente = await ObterPorId(clienteDto.Id);
+
+        if (await ValidarAlteracaoCliente(cliente, clienteDto.Email) == false)
+            return null;
+
+        cliente.Alterar(clienteDto.Nome, clienteDto.Email, clienteDto.Telefone, clienteDto.Celular, GetAuthUserId());
+
+        cliente.Endereco = cliente.Endereco.Alterar(clienteDto.Endereco?.Cep, clienteDto.Endereco?.Logradouro,
+            clienteDto.Endereco?.Numero, clienteDto.Endereco?.Bairro,
+            clienteDto.Endereco?.Cidade, clienteDto.Endereco?.Estado, GetAuthUserId());
+
+        cliente = Update(cliente);
+
+        if (await Commit() == false)
+            return null;
+
+        NewNotification("Cliente", "Cliente alterado com sucesso !", NotificationType.Information);
+
+        return cliente.ToApiResponse();
+    }
+
+    #region Validacoes
+
+    public async Task<bool> ValidarAlteracaoCliente(Cliente cliente, string emailDto)
+    {
+        if (cliente is null)
+            return false;
+
+        if (string.IsNullOrEmpty(emailDto))
+            return true;
+
+        emailDto = emailDto.Trim();
+
+        if (cliente.Email == emailDto)
+            return true;
+
+        var clienteEmail = await GetSingle(x => x.Id != cliente.Id &&
+                                                x.Email == emailDto);
+
+        if (clienteEmail is not null)
+        {
+            NewNotification("Cliente", "Já existe outro cliente com esse e-mail");
+            return false;
+        }
+
+        return true;
+    }
+
+    public async Task<bool> ValidarCriacaoCliente(ClienteCreateDto clienteDto)
+    {
+        if (string.IsNullOrWhiteSpace(clienteDto.CpfCnpj))
+        {
+            NewNotification("Cliente", "CPF/CNPJ é obrigatório");
+            return false;
+        }
+
+        if (clienteDto.Endereco is null)
+        {
+            NewNotification("Endereco", "Endereço não informado");
+            return false;
+        }
+
+        var cpfCnpj = LimparCpfCnpj(clienteDto.CpfCnpj);
+        var email = clienteDto.Email?.Trim();
+
+        var cliente = await GetSingle(x => (!string.IsNullOrEmpty(cpfCnpj) && x.CpfCnpj == cpfCnpj) ||
+                                           (!string.IsNullOrEmpty(email) && x.Email == email));
+
+        if (cliente is null)
+            return true;
+
+        if (cliente.CpfCnpj == cpfCnpj)
+            NewNotification("Cliente", "CPF/CNPJ já cadastrado");
+
+        if (cliente.Email == email)
+            NewNotification("Cliente", "E-mail já cadastrado");
+
+        return false;
+    }
+
+    public static string LimparCpfCnpj(string valor)
+    {
+        if (string.IsNullOrWhiteSpace(valor))
+            return string.Empty;
+
+        return new string(valor.Trim().Where(char.IsDigit).ToArray());
+    }
+
+    #endregion
 
 }

@@ -1,14 +1,18 @@
 ﻿using System.Linq.Expressions;
+using System.Security.Claims;
 using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore.Query;
 using Microsoft.Extensions.DependencyInjection;
+using OrdersCustomers.Application.Interfaces.Comum;
 using OrdersCustomers.Domain.Entities.Comum;
-using OrdersCustomers.Domain.Interfaces.Comum;
+using OrdersCustomers.Domain.Interfaces;
 
 namespace OrdersCustomers.Application.Services.Comum;
 
 public abstract class ServiceBase : IService
 {
+    private readonly IHttpContextAccessor _httpContextAccessor;
     private readonly IMapper _mapper;
     private readonly INotificationService _notifications;
 
@@ -16,6 +20,7 @@ public abstract class ServiceBase : IService
 
     protected ServiceBase(IServiceProvider serviceProvider)
     {
+        _httpContextAccessor = serviceProvider.GetService<IHttpContextAccessor>();
         _mapper = serviceProvider.GetService<IMapper>();
         _notifications = serviceProvider.GetService<INotificationService>();
     }
@@ -36,7 +41,7 @@ public abstract class ServiceBase : IService
 
     protected void NewNotification(string key, string message, NotificationType notificationType = NotificationType.Error) => _notifications.NewNotification(key, message, notificationType);
 
-    protected void NotificationErrors<TEntity>(TEntity model) where TEntity : IModelValidator => _notifications.NotificationErrors(model);
+    protected void NotificationErrors<TEntity>(TEntity model) => _notifications.NotificationErrors(model);
 
     protected bool HasNotificationsErrors() => _notifications.HasNotificationsErrors();
 
@@ -44,15 +49,15 @@ public abstract class ServiceBase : IService
 
     #region Dispose
 
-    private bool _disposed;   
+    private bool _disposed;
 
-    public void Dispose()                           
+    public void Dispose()
     {
         Dispose(true);
         GC.SuppressFinalize(this);
     }
 
-    protected virtual void Dispose(bool disposing)  
+    protected virtual void Dispose(bool disposing)
     {
         if (_disposed)
         {
@@ -62,12 +67,23 @@ public abstract class ServiceBase : IService
         _disposed = true;
     }
 
+
+    protected string GetAuthUserId()
+    {
+        var claims = _httpContextAccessor?.HttpContext?.User?.Claims;
+        var userId = claims?.FirstOrDefault(c => c.Type is ClaimTypes.NameIdentifier or "sub")?.Value ?? string.Empty;
+
+        return userId;
+    }
+
+
     #endregion
 }
 
 public abstract class ServiceBase<TEntity> : ServiceBase, IService<TEntity> where TEntity : EntityBase
 {
     private readonly IRepository<TEntity> _repoBase;
+
 
     protected ServiceBase(IServiceProvider serviceProvider, IRepository<TEntity> repoBase) : base(serviceProvider)
     {
@@ -153,24 +169,12 @@ public abstract class ServiceBase<TEntity> : ServiceBase, IService<TEntity> wher
 
     protected virtual TEntity Update(TEntity obj)
     {
-        var objExistente = GetSingle(x => x.Id == obj.Id, disableTracking: false).GetAwaiter().GetResult();
-        if (objExistente == null)
-        {
-            NewNotification("Registro", "Registro não encontrado.");
-            return obj;
-        }
-
-        var objMerge = MergeInto(objExistente, obj);
-        if (objMerge.EhValidoAlterar())
-        {
-            _repoBase.Update(objExistente, objMerge);
-        }
+        if (obj.EhValidoAlterar())
+            _repoBase.Update(obj);
         else
-        {
-            NotificationErrors(objMerge);
-        }
+            NotificationErrors(obj);
 
-        return objMerge;
+        return obj;
     }
 
     #region UoW
@@ -188,6 +192,7 @@ public abstract class ServiceBase<TEntity> : ServiceBase, IService<TEntity> wher
         }
 
         NewNotification("Commit", "Ocorreu um erro ao salvar os dados no banco de dados");
+        
         return await Task.FromResult(false);
     }
 

@@ -1,9 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using OrdersCustomers.Application.Interfaces;
+using OrdersCustomers.Application.Interfaces.Comum;
 using OrdersCustomers.Application.Services;
 using OrdersCustomers.Application.Services.Comum;
 using OrdersCustomers.Domain.Interfaces;
-using OrdersCustomers.Domain.Interfaces.Comum;
 
 namespace OrdersCustomers.Infra.Data.IoC;
 
@@ -13,5 +14,6 @@ public class DependencyInjectorApplication
     {
         services.AddScoped<INotificationService, NotificationService>();
         services.AddScoped<IClienteService, ClienteService>();
+        services.AddScoped<IEnderecoService, EnderecoService>();
     }
 }

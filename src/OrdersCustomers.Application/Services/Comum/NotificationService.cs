@@ -1,6 +1,6 @@
 ﻿using FluentValidation.Results;
+using OrdersCustomers.Application.Interfaces.Comum;
 using OrdersCustomers.Domain.Entities.Comum;
-using OrdersCustomers.Domain.Interfaces.Comum;
 
 namespace OrdersCustomers.Application.Services.Comum;
 
@@ -23,7 +23,7 @@ public sealed class NotificationService : INotificationService
         Handle(new Notification(key, message, type), default);
     }
 
-    public void NotificationErrors<TEntity>(TEntity model) where TEntity : IModelValidator
+    public void NotificationErrors<TEntity>(TEntity model)
     {
         var validationResult = (ValidationResult)model?.GetType()?.GetProperty("ValidationResult")?.GetValue(model, null);
 
