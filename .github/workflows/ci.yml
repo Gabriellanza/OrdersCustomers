@@ -24,14 +24,14 @@ jobs:
         dotnet-version: ${{ matrix.dotnet-version }}
 
     - name: Restore dependencies
-      run: dotnet restore src/OrdersCustomers.sln
+      run: dotnet restore OrdersCustomers/OrdersCustomers.sln
 
     - name: Build solution
-      run: dotnet build src/OrdersCustomers.sln --configuration Release --no-restore
+      run: dotnet build OrdersCustomers/OrdersCustomers.sln --configuration Release --no-restore
 
     - name: Run unit tests
       run: |
-        dotnet test src/OrdersCustomers.Tests/OrdersCustomers.Tests.csproj \
+        dotnet test OrdersCustomers.Tests/OrdersCustomers.Tests.csproj \
           --configuration Release \
           --no-build \
           --logger "trx;LogFileName=unit-tests.trx" \
@@ -40,7 +40,7 @@ jobs:
 
     - name: Run integration tests
       run: |
-        dotnet test src/OrdersCustomers.Tests/OrdersCustomers.IntegrationTests.csproj \
+        dotnet test OrdersCustomers.Tests/OrdersCustomers.IntegrationTests.csproj \
           --configuration Release \
           --no-build \
           --logger "trx;LogFileName=integration-tests.trx" \
