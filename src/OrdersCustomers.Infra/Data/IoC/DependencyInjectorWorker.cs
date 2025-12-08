@@ -11,7 +11,7 @@ using RabbitMqService = OrdersCustomers.Infra.Rabbit.RabbitMqService;
 
 namespace OrdersCustomers.Infra.Data.IoC;
 
-public class DependencyInjectorWorker
+public static class DependencyInjectorWorker
 {
     public static void Register(IServiceCollection services)
     {

@@ -19,7 +19,7 @@ public abstract class BaseController : ControllerBase
 
     protected void NewNotification(string key, string message, NotificationType type = NotificationType.Error) => Notifications.NewNotification(key, message, type);
 
-    protected void NotificationErrors<TEntity>(TEntity model) where TEntity : IModelValidator? => Notifications.NotificationErrors(model);
+    protected void NotificationErrors<TEntity>(TEntity model) where TEntity : IModelValidator => Notifications.NotificationErrors(model);
 
     #endregion
 
@@ -73,10 +73,10 @@ public abstract class ApiBaseController : BaseController
         ));
     }
 
-    protected IActionResult Response<T>(T result) where T : IComparable => ResponseGeneric(result);
+    protected new IActionResult Response<T>(T result) where T : IComparable => ResponseGeneric(result);
 
-    protected IActionResult Response<T>(IEnumerable<T> result) where T : IComparable => ResponseGeneric(result);
+    protected new IActionResult Response<T>(IEnumerable<T> result) where T : IComparable => ResponseGeneric(result);
 
-    protected IActionResult Response(IEnumerable<dynamic> result) => ResponseGeneric(result);
+    protected new IActionResult Response(IEnumerable<dynamic> result) => ResponseGeneric(result);
 
 }

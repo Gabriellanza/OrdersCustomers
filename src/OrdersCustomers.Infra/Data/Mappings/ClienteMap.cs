@@ -6,21 +6,21 @@ namespace OrdersCustomers.Infra.Data.Mappings;
 
 public class ClienteMap : EntityMapBase<Cliente>
 {
-    public override void Configure(EntityTypeBuilder<Cliente> entity)
+    public override void Configure(EntityTypeBuilder<Cliente> builder)
     { 
-        base.Configure(entity);
+        base.Configure(builder);
 
-        entity.ToTable("cliente");
+        builder.ToTable("cliente");
 
-        entity.Property(x => x.CpfCnpj).HasColumnName("cpf_cnpj").HasMaxLength(50).IsRequired(false);
-        entity.Property(x => x.Nome).HasColumnName("nome").HasMaxLength(255).IsRequired();
-        entity.Property(x => x.Email).HasColumnName("email").HasMaxLength(255).IsRequired(false);
-        entity.Property(x => x.Telefone).HasColumnName("telefone").HasMaxLength(20).IsRequired(false);
-        entity.Property(x => x.Celular).HasColumnName("celular").HasMaxLength(20).IsRequired(false);
+        builder.Property(x => x.CpfCnpj).HasColumnName("cpf_cnpj").HasMaxLength(50).IsRequired(false);
+        builder.Property(x => x.Nome).HasColumnName("nome").HasMaxLength(255).IsRequired();
+        builder.Property(x => x.Email).HasColumnName("email").HasMaxLength(255).IsRequired(false);
+        builder.Property(x => x.Telefone).HasColumnName("telefone").HasMaxLength(20).IsRequired(false);
+        builder.Property(x => x.Celular).HasColumnName("celular").HasMaxLength(20).IsRequired(false);
 
-        entity.HasOne(x => x.Endereco).WithOne(x => x.Cliente).HasForeignKey<Endereco>(x => x.ClienteId).IsRequired(false);
+        builder.HasOne(x => x.Endereco).WithOne(x => x.Cliente).HasForeignKey<Endereco>(x => x.ClienteId).IsRequired(false);
 
-        entity.HasIndex(x => x.CpfCnpj).HasDatabaseName("cliente_cpf_cnpj_idx").IsUnique();
-        entity.HasIndex(x => x.Nome).HasDatabaseName("cliente_nome_idx");
+        builder.HasIndex(x => x.CpfCnpj).HasDatabaseName("cliente_cpf_cnpj_idx").IsUnique();
+        builder.HasIndex(x => x.Nome).HasDatabaseName("cliente_nome_idx");
     }
 }

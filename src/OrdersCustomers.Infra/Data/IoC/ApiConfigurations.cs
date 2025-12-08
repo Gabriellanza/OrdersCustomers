@@ -65,15 +65,6 @@ public static class ApiConfigurations
             app.UseSwaggerUI();
         }
 
-        //app.UseSwagger();
-
-        //app.UseSwaggerUI(c =>
-        //{
-        //    c.RoutePrefix = string.Empty;
-        //    c.SwaggerEndpoint("swagger/v1/swagger.json", "OrdersCustomers.API");
-        //    c.DocumentTitle = "OrdersCustomers";
-        //});
-
         app.UseHttpsRedirection();
 
         app.UseCors();

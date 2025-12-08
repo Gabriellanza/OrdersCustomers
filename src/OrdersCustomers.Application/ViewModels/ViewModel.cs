@@ -45,16 +45,16 @@ public class ViewModel<T> : ViewModelBase
     public List<ViewModelError> Errors { get; set; }
 
     [DataMember(Name = "remoteAddress")]
-    public string? RemoteAddress { get; set; }
+    public string RemoteAddress { get; set; }
 
     [DataMember(Name = "path")]
-    public string? Path { get; set; }
+    public string Path { get; set; }
 
     [DataMember(Name = "data")]
     public T Data { get; set; }
 
     [DataMember(Name = "message")]
-    public string? Message { get; set; }
+    public string Message { get; set; }
 
 }
 

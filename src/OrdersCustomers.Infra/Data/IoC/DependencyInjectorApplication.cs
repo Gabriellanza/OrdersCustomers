@@ -9,7 +9,7 @@ using OrdersCustomers.Infra.Data.Procedures;
 
 namespace OrdersCustomers.Infra.Data.IoC;
 
-public class DependencyInjectorApplication
+public static class DependencyInjectorApplication
 {
     public static void Register(IServiceCollection services)
     {

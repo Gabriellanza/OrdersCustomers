@@ -14,11 +14,9 @@ namespace OrdersCustomers.Application.Services;
 
 public class ClienteService : ServiceBase<Cliente>, IClienteService
 {
-    private readonly IEnderecoService _enderecoService;
 
-    public ClienteService(IServiceProvider serviceProvider, IRepository<Cliente> repoBase, IEnderecoService enderecoService) : base(serviceProvider, repoBase)
+    public ClienteService(IServiceProvider serviceProvider, IRepository<Cliente> repoBase) : base(serviceProvider, repoBase)
     {
-        _enderecoService = enderecoService;
     }
 
     public async Task<Cliente> ObterPorId(Guid id)
@@ -57,7 +55,7 @@ public class ClienteService : ServiceBase<Cliente>, IClienteService
 
         cliente = Update(cliente);
 
-        if (await Commit() == false)
+        if (!await Commit())
             return null;
 
         NewNotification("Cliente", "Cliente foi inativado!", NotificationType.Information);
@@ -67,7 +65,7 @@ public class ClienteService : ServiceBase<Cliente>, IClienteService
 
     public async Task<ClienteResponseDto> Criar(ClienteCreateDto clienteDto)
     {
-        if (await ValidarCriacaoCliente(clienteDto) == false)
+        if (!await ValidarCriacaoCliente(clienteDto))
             return null;
 
         var cliente = Cliente.Novo(clienteDto.CpfCnpj, clienteDto.Nome, clienteDto.Email, clienteDto.Telefone,
@@ -78,7 +76,7 @@ public class ClienteService : ServiceBase<Cliente>, IClienteService
 
         cliente = Add(cliente);
 
-        if (await Commit() == false)
+        if (!await Commit())
             return null;
 
         return cliente.ToApiResponse();
@@ -89,7 +87,7 @@ public class ClienteService : ServiceBase<Cliente>, IClienteService
     {
         var cliente = await ObterPorId(clienteDto.Id);
 
-        if (await ValidarAlteracaoCliente(cliente, clienteDto.Email) == false)
+        if (!await ValidarAlteracaoCliente(cliente, clienteDto.Email))
             return null;
 
         cliente.Alterar(clienteDto.Nome, clienteDto.Email, clienteDto.Telefone, clienteDto.Celular, GetAuthUserId());
@@ -100,7 +98,7 @@ public class ClienteService : ServiceBase<Cliente>, IClienteService
 
         cliente = Update(cliente);
 
-        if (await Commit() == false)
+        if (!await Commit())
             return null;
 
         NewNotification("Cliente", "Cliente alterado com sucesso !", NotificationType.Information);
@@ -137,7 +135,7 @@ public class ClienteService : ServiceBase<Cliente>, IClienteService
 
     public async Task<bool> ValidarCriacaoCliente(ClienteCreateDto clienteDto)
     {
-        if (string.IsNullOrWhiteSpace(clienteDto.CpfCnpj))
+        if (string.IsNullOrWhiteSpace(clienteDto?.CpfCnpj))
         {
             NewNotification("Cliente", "CPF/CNPJ é obrigatório");
             return false;

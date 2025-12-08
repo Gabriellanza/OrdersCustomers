@@ -6,22 +6,22 @@ namespace OrdersCustomers.Infra.Data.Mappings;
 
 public class ItemOrdemMap : EntityMapBase<ItemOrdem>
 {
-    public override void Configure(EntityTypeBuilder<ItemOrdem> entity)
+    public override void Configure(EntityTypeBuilder<ItemOrdem> builder)
     {
-        base.Configure(entity);
+        base.Configure(builder);
 
-        entity.ToTable("item_ordem");
+        builder.ToTable("item_ordem");
 
-        entity.Property(x => x.NomeProduto).HasColumnName("nome_produto")
+        builder.Property(x => x.NomeProduto).HasColumnName("nome_produto")
             .HasMaxLength(255).IsRequired();
-        entity.Property(x => x.Quantidade).HasColumnName("quantidade").IsRequired();
-        entity.Property(x => x.ValorUnitario).HasColumnName("valor_unitario")
+        builder.Property(x => x.Quantidade).HasColumnName("quantidade").IsRequired();
+        builder.Property(x => x.ValorUnitario).HasColumnName("valor_unitario")
             .HasColumnType("numeric(18,2)").IsRequired();
-        entity.Property(x => x.OrdemId).HasColumnName("ordem_id").IsRequired();
+        builder.Property(x => x.OrdemId).HasColumnName("ordem_id").IsRequired();
 
-        entity.HasIndex(x => x.OrdemId).HasDatabaseName("item_ordem_ordem_id_idx");
-        entity.HasIndex(x => x.NomeProduto).HasDatabaseName("item_ordem_nome_produto_idx");
+        builder.HasIndex(x => x.OrdemId).HasDatabaseName("item_ordem_ordem_id_idx");
+        builder.HasIndex(x => x.NomeProduto).HasDatabaseName("item_ordem_nome_produto_idx");
 
-        entity.Ignore(x => x.ValorTotal);
+        builder.Ignore(x => x.ValorTotal);
     }
 }

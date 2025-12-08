@@ -10,7 +10,7 @@ public interface IService : IDisposable
 
 public interface IService<TEntity> : IService
 {
-    Task<TEntity> Save(TEntity obj, bool forced);
+    Task<TEntity> Save(TEntity obj);
 
     Task<TEntity> Delete(TEntity obj, bool forced);
 

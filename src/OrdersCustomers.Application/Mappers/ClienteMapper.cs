@@ -8,8 +8,8 @@ public static class ClienteMapper
 {
     public static IEnumerable<ClienteResponseDto> ToApiResponse(this List<Cliente> clienteList)
     {
-        if (clienteList is null) return null;
-        if (!clienteList.Any()) return null;
+        if (clienteList is null) return Enumerable.Empty<ClienteResponseDto>();
+        if (!clienteList.Any()) return Enumerable.Empty<ClienteResponseDto>();
 
         return clienteList.Select(cliente => cliente.ToApiResponse());
     }

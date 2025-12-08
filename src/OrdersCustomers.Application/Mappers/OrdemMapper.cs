@@ -1,4 +1,5 @@
-﻿using OrdersCustomers.Application.DTOs.Ordem;
+﻿using OrdersCustomers.Application.DTOs.Cliente;
+using OrdersCustomers.Application.DTOs.Ordem;
 using OrdersCustomers.Domain.Entities;
 using OrdersCustomers.Domain.Entities.Rabbit;
 
@@ -8,8 +9,8 @@ public static class OrdemMapper
 {
     public static IEnumerable<OrdemResponseDto> ToApiResponse(this List<Ordem> ordemList)
     {
-        if (ordemList is null) return null;
-        if (!ordemList.Any()) return null;
+        if (ordemList is null) return Enumerable.Empty<OrdemResponseDto>();
+        if (!ordemList.Any()) return Enumerable.Empty<OrdemResponseDto>();
 
         return ordemList.Select(ordem => ordem.ToApiResponse());
     }
@@ -32,8 +33,8 @@ public static class OrdemMapper
 
     public static List<OrdemItemResponseDto> ToApiResponse(this List<ItemOrdem> itemOrdemList)
     {
-        if (itemOrdemList is null) return null;
-        if (!itemOrdemList.Any()) return null;
+        if (itemOrdemList is null) return new List<OrdemItemResponseDto>();
+        if (!itemOrdemList.Any()) return new List<OrdemItemResponseDto>();
 
         return itemOrdemList.Select(itemOrdem => new OrdemItemResponseDto
         {
@@ -59,8 +60,8 @@ public static class OrdemMapper
 
     public static List<OrdemItemCreateMessage> ToCreateMessage(this List<ItemOrdem> itemOrdemList)
     {
-        if (itemOrdemList is null) return null;
-        if (!itemOrdemList.Any()) return null;
+        if (itemOrdemList is null) return new List<OrdemItemCreateMessage>();
+        if (!itemOrdemList.Any()) return new List<OrdemItemCreateMessage>();
 
         return itemOrdemList.Select(itemOrdem => new OrdemItemCreateMessage
         {

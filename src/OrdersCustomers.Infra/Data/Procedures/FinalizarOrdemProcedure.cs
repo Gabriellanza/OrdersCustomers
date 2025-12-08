@@ -5,6 +5,7 @@ using System.Data;
 using Dapper;
 using Microsoft.EntityFrameworkCore;
 using OrdersCustomers.Domain.Interfaces.Procedures;
+using System.Runtime.Serialization;
 
 namespace OrdersCustomers.Infra.Data.Procedures;
 
@@ -30,8 +31,8 @@ public class FinalizarOrdemProcedure : RepositoryBase<Ordem>, IFinalizarOrdemPro
         }
         catch (Exception ex)
         {
-            throw new Exception("Erro ao executar a procedure: FINALIZAR_ORDEM: " + ex.Message);
+            throw new Exception("Erro ao executar a procedure: FINALIZAR_ORDEM", ex);
         }
-      
+
     }
 }

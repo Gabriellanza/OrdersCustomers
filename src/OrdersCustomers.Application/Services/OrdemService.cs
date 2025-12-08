@@ -53,7 +53,7 @@ public class OrdemService : ServiceBase<Ordem>, IOrdemService
 
     public async Task<OrdemResponseDto> Criar(OrdemCreateDto ordemCreateDto)
     {
-        if (ValidarCriacaoOrdem(ordemCreateDto) == false)
+        if (!ValidarCriacaoOrdem(ordemCreateDto))
             return null;
 
         var ordem = Ordem.Nova(ordemCreateDto.ClienteId, GetAuthUserId());
@@ -67,7 +67,7 @@ public class OrdemService : ServiceBase<Ordem>, IOrdemService
 
         ordem = Add(ordem);
 
-        if (await Commit() == false)
+        if (!await Commit())
             return null;
 
         NewNotification("Ordem", "Ordem criada com sucesso", NotificationType.Information);
@@ -81,7 +81,7 @@ public class OrdemService : ServiceBase<Ordem>, IOrdemService
     {
         var ordem = await ObterPorNumeroOrdem(numeroOrdem);
         
-        if (ValidarFinalizacaoOrdem(ordem) == false)
+        if (!ValidarFinalizacaoOrdem(ordem))
             return null;
 
         await _finalizarOrdemProcedure.Execute(ordem.Id);

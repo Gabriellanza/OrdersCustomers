@@ -90,11 +90,11 @@ public abstract class ServiceBase<TEntity> : ServiceBase, IService<TEntity> wher
         _repoBase = repoBase;
     }
 
-    public virtual async Task<TEntity> Save(TEntity obj, bool forced = false)
+    public virtual async Task<TEntity> Save(TEntity obj)
     {
         var retorno = await SaveTransaction(obj);
 
-        await Commit(forced);
+        await Commit();
 
         return retorno;
     }
@@ -108,13 +108,13 @@ public abstract class ServiceBase<TEntity> : ServiceBase, IService<TEntity> wher
         return retorno;
     }
 
-    public virtual async Task<TEntity?> GetSingle(Expression<Func<TEntity, bool>>? predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, Expression<Func<TEntity, TEntity>>? selector = null, bool disableTracking = true, int? take = null, int? skip = null, bool useSplitQuery = true)
+    public virtual async Task<TEntity> GetSingle(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, Expression<Func<TEntity, TEntity>> selector = null, bool disableTracking = true, int? take = null, int? skip = null, bool useSplitQuery = true)
     {
         var item = _repoBase.GetSingle(predicate, include, orderBy, selector, disableTracking, take, skip, useSplitQuery);
         return await Task.FromResult(item);
     }
 
-    public virtual async Task<IEnumerable<TEntity>> GetList(Expression<Func<TEntity, bool>>? predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, Expression<Func<TEntity, TEntity>>? selector = null, bool disableTracking = true, int? take = null, int? skip = null, bool useSplitQuery = true)
+    public virtual async Task<IEnumerable<TEntity>> GetList(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, Expression<Func<TEntity, TEntity>> selector = null, bool disableTracking = true, int? take = null, int? skip = null, bool useSplitQuery = true)
     {
         var lista = _repoBase.GetList(predicate, include, orderBy, selector, disableTracking, take, skip, useSplitQuery);
         return await Task.FromResult(lista);

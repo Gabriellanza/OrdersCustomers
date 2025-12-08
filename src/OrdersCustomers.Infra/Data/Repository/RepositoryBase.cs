@@ -44,17 +44,17 @@ public class RepositoryBase<TEntity> : IRepository<TEntity> where TEntity : Enti
         _dbContext.Entry(entity).State = EntityState.Deleted;
     }
 
-    public virtual TEntity? GetSingle(Expression<Func<TEntity, bool>>? predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, Expression<Func<TEntity, TEntity>>? selector = null, bool disableTracking = true, int? take = null, int? skip = null, bool useSplitQuery = true)
+    public virtual TEntity GetSingle(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, Expression<Func<TEntity, TEntity>> selector = null, bool disableTracking = true, int? take = null, int? skip = null, bool useSplitQuery = true)
     {
         return GetList(predicate, include, orderBy, selector, disableTracking, take ?? 1, skip, useSplitQuery).FirstOrDefault();
     }
 
-    public virtual IEnumerable<TEntity> GetList(Expression<Func<TEntity, bool>>? predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, Expression<Func<TEntity, TEntity>>? selector = null, bool disableTracking = true, int? take = null, int? skip = null, bool useSplitQuery = true)
+    public virtual IEnumerable<TEntity> GetList(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, Expression<Func<TEntity, TEntity>> selector = null, bool disableTracking = true, int? take = null, int? skip = null, bool useSplitQuery = true)
     {
         return GetListQuery(predicate, include, orderBy, selector, disableTracking, take, skip, useSplitQuery).ToList();
     }
 
-    public virtual IQueryable<TEntity> GetListQuery(Expression<Func<TEntity, bool>>? predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>>? include = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null, Expression<Func<TEntity, TEntity>>? selector = null, bool disableTracking = true, int? take = null, int? skip = null, bool useSplitQuery = true)
+    public virtual IQueryable<TEntity> GetListQuery(Expression<Func<TEntity, bool>> predicate = null, Func<IQueryable<TEntity>, IIncludableQueryable<TEntity, object>> include = null, Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>> orderBy = null, Expression<Func<TEntity, TEntity>> selector = null, bool disableTracking = true, int? take = null, int? skip = null, bool useSplitQuery = true)
     {
         var query = _dbSet.AsQueryable();
         if (disableTracking)
