@@ -16,12 +16,11 @@ public static class ApiConfigurations
 
         services.AddCors(options =>
         {
-            options.AddPolicy("ReactApp", policy =>
+            options.AddDefaultPolicy(policy =>
             {
-                policy.WithOrigins("http://localhost:5173")
+                policy.AllowAnyOrigin()
                     .AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .AllowCredentials();
+                    .AllowAnyMethod();
             });
         });
 
@@ -77,7 +76,7 @@ public static class ApiConfigurations
 
         app.UseHttpsRedirection();
 
-        app.UseCors("ReactApp");
+        app.UseCors();
         app.UseAuthentication();
         app.UseAuthorization();
     }

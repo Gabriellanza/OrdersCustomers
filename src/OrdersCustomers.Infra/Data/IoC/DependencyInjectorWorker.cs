@@ -6,18 +6,15 @@ using OrdersCustomers.Application.Services;
 using OrdersCustomers.Application.Services.Comum;
 using OrdersCustomers.Domain.Interfaces.Procedures;
 using OrdersCustomers.Infra.Data.Procedures;
+using IRabbitMqService = OrdersCustomers.Domain.Interfaces.Rabbit.IRabbitMqService;
+using RabbitMqService = OrdersCustomers.Infra.Rabbit.RabbitMqService;
 
 namespace OrdersCustomers.Infra.Data.IoC;
 
-public class DependencyInjectorApplication
+public class DependencyInjectorWorker
 {
     public static void Register(IServiceCollection services)
     {
-        services.AddScoped<INotificationService, NotificationService>();
-        services.AddScoped<IClienteService, ClienteService>();
-        services.AddScoped<IEnderecoService, EnderecoService>();
-        services.AddScoped<IOrdemService, OrdemService>();
-
-        services.AddScoped<IFinalizarOrdemProcedure, FinalizarOrdemProcedure>();
+        services.AddSingleton<IRabbitMqService, RabbitMqService>();
     }
 }

@@ -4,7 +4,11 @@
     <TargetFramework>net8.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <OutputType>Exe</OutputType>
-  </PropertyGroup>
+  </PropertyGroup>	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<OutputType>Exe</OutputType>
+	
 
 	<ItemGroup>
 		<None Remove="appsettings.Development.json" />
@@ -21,17 +25,14 @@
 
 	<ItemGroup>
 		<PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.3.0" />
-		<PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.1" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.22" />
 		<PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
-		<PackageReference Include="Microsoft.Extensions.Hosting" Version="8.0.1" />
 		<PackageReference Include="RabbitMQ.Client" Version="7.2.0" />
 	</ItemGroup>
 
 	<ItemGroup>
 		<ProjectReference Include="..\OrdersCustomers.Application\OrdersCustomers.Application.csproj" />
 		<ProjectReference Include="..\OrdersCustomers.Domain\OrdersCustomers.Domain.csproj" />
-		<ProjectReference Include="..\OrdersCustomers.Infra\OrdersCustomers.Infra.csproj" />
 	</ItemGroup>
 
 </Project>

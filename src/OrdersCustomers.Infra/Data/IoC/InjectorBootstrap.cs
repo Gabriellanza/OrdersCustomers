@@ -7,8 +7,10 @@ public static class InjectorBootstrap
 {
     public static void RegisterServices(IServiceCollection services, IConfiguration configuration)
     {
-        DependencyInjectorApplication.Register(services, configuration);
-
         DependencyInjectorRepository.Register(services, configuration);
+        
+        DependencyInjectorApplication.Register(services);
+
+        DependencyInjectorWorker.Register(services);
     }
 }

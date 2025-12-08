@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OrdersCustomers.Application.DTOs.Cliente;
 using OrdersCustomers.Application.DTOs.Ordem;
 using OrdersCustomers.Application.Interfaces;
 using OrdersCustomers.Application.Mappers;
@@ -8,16 +7,19 @@ using OrdersCustomers.Domain.Entities;
 using OrdersCustomers.Domain.Entities.Comum;
 using OrdersCustomers.Domain.Interfaces;
 using OrdersCustomers.Domain.Interfaces.Procedures;
+using OrdersCustomers.Domain.Interfaces.Rabbit;
 
 namespace OrdersCustomers.Application.Services;
 
 public class OrdemService : ServiceBase<Ordem>, IOrdemService
 {
+    private readonly IRabbitMqService _rabbitMqService;
     private readonly IFinalizarOrdemProcedure _finalizarOrdemProcedure;
 
-    public OrdemService(IServiceProvider serviceProvider, IRepository<Ordem> repoBase, IFinalizarOrdemProcedure finalizarOrdemProcedure) : base(serviceProvider, repoBase)
+    public OrdemService(IServiceProvider serviceProvider, IRepository<Ordem> repoBase, IFinalizarOrdemProcedure finalizarOrdemProcedure, IRabbitMqService rabbitMqService) : base(serviceProvider, repoBase)
     {
         _finalizarOrdemProcedure = finalizarOrdemProcedure;
+        _rabbitMqService = rabbitMqService;
     }
 
     public async Task<Ordem> ObterPorNumeroOrdem(string numeroOrdem)
@@ -69,6 +71,8 @@ public class OrdemService : ServiceBase<Ordem>, IOrdemService
             return null;
 
         NewNotification("Ordem", "Ordem criada com sucesso", NotificationType.Information);
+
+        await _rabbitMqService.PublishAsync("nova_ordem", ordem.ToCreateMessage());
 
         return ordem.ToApiResponse();
     }

@@ -1,5 +1,6 @@
 ﻿using OrdersCustomers.Application.DTOs.Ordem;
 using OrdersCustomers.Domain.Entities;
+using OrdersCustomers.Domain.Entities.Rabbit;
 
 namespace OrdersCustomers.Application.Mappers;
 
@@ -41,5 +42,31 @@ public static class OrdemMapper
             ValorUnitario = itemOrdem.ValorUnitario
         }).ToList();
     }
-    
+
+    public static OrdemCreateMessage ToCreateMessage(this Ordem ordem)
+    {
+        if (ordem is null) return null;
+
+        return new OrdemCreateMessage
+        {
+            Id = ordem.Id,
+            ClienteId = ordem.ClienteId,
+            NumeroOrdem = ordem.NumeroOrdem.ToString(),
+            ValorTotal = ordem.ValorTotal,
+            Itens = ordem.Itens.ToCreateMessage(),
+        };
+    }
+
+    public static List<OrdemItemCreateMessage> ToCreateMessage(this List<ItemOrdem> itemOrdemList)
+    {
+        if (itemOrdemList is null) return null;
+        if (!itemOrdemList.Any()) return null;
+
+        return itemOrdemList.Select(itemOrdem => new OrdemItemCreateMessage
+        {
+            NomeProduto = itemOrdem.NomeProduto,
+            Quantidade = itemOrdem.Quantidade,
+            ValorUnitario = itemOrdem.ValorUnitario
+        }).ToList();
+    }
 }

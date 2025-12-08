@@ -43,14 +43,4 @@ public class OrdemController : ApiBaseController
         return ret?.NumeroOrdem is not null ? CreateResponse(ret) : Response(null);
     }
 
-    [HttpPut("Finalizar/{numeroOrdem}")]
-    public async Task<IActionResult> Finalizar(string numeroOrdem)
-    {
-        var ret = await _ordemService.Finalizar(numeroOrdem);
-
-        return Response(ret);
-    }
-
-
-
 }

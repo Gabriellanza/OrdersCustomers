@@ -1,9 +1,7 @@
-# Imagem base da aplicação em runtime
 FROM mcr.microsoft.com/dotnet/aspnet:8.0 AS base
 WORKDIR /app
 EXPOSE 8080
 
-# Imagem do SDK para build
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
 WORKDIR /src
 
@@ -12,7 +10,10 @@ COPY ["src/OrdersCustomers.Application/OrdersCustomers.Application.csproj", "Ord
 COPY ["src/OrdersCustomers.Domain/OrdersCustomers.Domain.csproj", "OrdersCustomers.Domain/"]
 COPY ["src/OrdersCustomers.Infra/OrdersCustomers.Infra.csproj", "OrdersCustomers.Infra/"]
 
-COPY src/ ./ 
+COPY src/OrdersCustomers/ ./OrdersCustomers/
+COPY src/OrdersCustomers.Application/ ./OrdersCustomers.Application/
+COPY src/OrdersCustomers.Domain/ ./OrdersCustomers.Domain/
+COPY src/OrdersCustomers.Infra/ ./OrdersCustomers.Infra/
 
 RUN dotnet restore "OrdersCustomers/OrdersCustomers.csproj"
 
