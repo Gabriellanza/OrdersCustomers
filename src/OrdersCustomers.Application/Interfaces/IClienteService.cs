@@ -5,13 +5,13 @@ namespace OrdersCustomers.Application.Interfaces;
 
 public interface IClienteService
 {
-    Task<IEnumerable<ClienteDto>> ListarTodos();
+    Task<IEnumerable<ClienteResponseDto>> ListarTodos();
 
     Task<Cliente> ObterPorId(Guid id);
 
-    Task<ClienteDto> Criar(ClienteCreateDto clienteDto);
+    Task<ClienteResponseDto> Criar(ClienteCreateDto clienteDto);
 
-    Task<ClienteDto> Alterar(ClienteAlterDto clienteDto);
+    Task<ClienteResponseDto> Alterar(ClienteAlterDto clienteDto);
 
-    Task<ClienteDto> Inativar(Guid id);
+    Task<ClienteResponseDto> Inativar(Guid id);
 }

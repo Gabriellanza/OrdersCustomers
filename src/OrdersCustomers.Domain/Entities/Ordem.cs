@@ -26,6 +26,8 @@ public class Ordem : EntityBase
 
     #endregion
 
+    public Ordem() { }
+
     public Ordem(long numeroOrdem, Guid clienteId, DateTime dataCriacao, OrdemStatus status, decimal valorTotal, DateTime? dataConclusao)
     {
         NumeroOrdem = numeroOrdem;
@@ -39,6 +41,29 @@ public class Ordem : EntityBase
 
     #region Regras de Negocios
 
+    public static Ordem Nova(Guid clienteId, string usuario)
+    {
+        return new Ordem
+        {
+            UsuarioCriacao = usuario,
+            NumeroOrdem = GerarNumeroOrdem(),
+            Status = (OrdemStatus)1,
+            ClienteId = clienteId,
+            Itens = new List<ItemOrdem>()
+        };
+    }
+
+    public Ordem AtualizarTotal(decimal? valorTotal)
+    {
+        ValorTotal = valorTotal ?? 0;
+
+        return this;
+    }
+
+    public static long GerarNumeroOrdem()
+    {
+        return DateTime.UtcNow.Ticks;
+    }
 
 
 

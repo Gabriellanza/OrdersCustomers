@@ -14,6 +14,8 @@ public class ItemOrdem : EntityBase
 
     public Guid OrdemId { get; set; }
 
+    public ItemOrdem() { }
+
     public ItemOrdem(string nomeProduto, int quantidade, decimal valorUnitario, Guid ordemId)
     {
         NomeProduto = nomeProduto;
@@ -24,6 +26,16 @@ public class ItemOrdem : EntityBase
 
     #region Regras de Negocios
 
+    public static ItemOrdem Novo(string nomeProduto, int qtde, decimal valorUnit, string usuario)
+    {
+        return new ItemOrdem
+        {
+            UsuarioCriacao = usuario,
+            NomeProduto = nomeProduto,
+            Quantidade = qtde,
+            ValorUnitario = valorUnit
+        };
+    }
 
 
     #endregion

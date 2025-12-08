@@ -3,7 +3,7 @@ using OrdersCustomers.Application.ViewModels;
 
 namespace OrdersCustomers.Application.DTOs.Cliente;
 
-public class ClienteDto : ViewModelBase
+public class ClienteResponseDto : ViewModelBase
 {
     public Guid Id { get; set; }
 
@@ -17,5 +17,5 @@ public class ClienteDto : ViewModelBase
 
     public string Celular { get; set; }
 
-    public EnderecoDto Endereco { get; set; }
+    public EnderecoResponseDto  Endereco { get; set; }
 }

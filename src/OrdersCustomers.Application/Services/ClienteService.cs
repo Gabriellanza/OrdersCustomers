@@ -41,7 +41,7 @@ public class ClienteService : ServiceBase<Cliente>, IClienteService
         return cliente;
     }
 
-    public async Task<IEnumerable<ClienteDto>> ListarTodos()
+    public async Task<IEnumerable<ClienteResponseDto>> ListarTodos()
     {
         var clienteList = await GetList(x => x.Ativo, include: query => query
             .Include(x => x.Endereco));
@@ -49,7 +49,7 @@ public class ClienteService : ServiceBase<Cliente>, IClienteService
         return clienteList.ToList().ToApiResponse();
     }
 
-    public async Task<ClienteDto> Inativar(Guid id)
+    public async Task<ClienteResponseDto> Inativar(Guid id)
     {
         var cliente = await ObterPorId(id);
 
@@ -65,7 +65,7 @@ public class ClienteService : ServiceBase<Cliente>, IClienteService
         return cliente.ToApiResponse();
     }
 
-    public async Task<ClienteDto> Criar(ClienteCreateDto clienteDto)
+    public async Task<ClienteResponseDto> Criar(ClienteCreateDto clienteDto)
     {
         if (await ValidarCriacaoCliente(clienteDto) == false)
             return null;
@@ -85,7 +85,7 @@ public class ClienteService : ServiceBase<Cliente>, IClienteService
     }
 
 
-    public async Task<ClienteDto> Alterar(ClienteAlterDto clienteDto)
+    public async Task<ClienteResponseDto> Alterar(ClienteAlterDto clienteDto)
     {
         var cliente = await ObterPorId(clienteDto.Id);
 

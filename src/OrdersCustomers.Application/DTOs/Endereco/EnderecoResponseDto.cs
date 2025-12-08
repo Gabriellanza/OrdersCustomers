@@ -1,6 +1,6 @@
 ﻿namespace OrdersCustomers.Application.DTOs.Endereco;
 
-public class EnderecoDto
+public class EnderecoResponseDto
 {
     public Guid Id { get; set; }
 

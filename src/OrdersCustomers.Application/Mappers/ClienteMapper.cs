@@ -6,12 +6,20 @@ namespace OrdersCustomers.Application.Mappers;
 
 public static class ClienteMapper
 {
-    public static ClienteDto ToApiResponse(this Cliente clienteObj)
+    public static IEnumerable<ClienteResponseDto> ToApiResponse(this List<Cliente> clienteList)
+    {
+        if (clienteList is null) return null;
+        if (!clienteList.Any()) return null;
+
+        return clienteList.Select(cliente => cliente.ToApiResponse());
+    }
+
+    public static ClienteResponseDto ToApiResponse(this Cliente clienteObj)
     {
         if (clienteObj is null)
             return null;
 
-        return new ClienteDto
+        return new ClienteResponseDto
         {
             Id = clienteObj.Id,
             CpfCnpj = clienteObj.CpfCnpj,
@@ -23,29 +31,11 @@ public static class ClienteMapper
         };
     }
 
-    public static IEnumerable<ClienteDto> ToApiResponse(this List<Cliente> clienteList)
-    {
-        if (clienteList is null) return null;
-        if (!clienteList.Any()) return null;
-
-        return clienteList.Select(cliente => new ClienteDto
-        {
-            Id = cliente.Id,
-            CpfCnpj = cliente.CpfCnpj,
-            Nome = cliente.Nome,
-            Email = cliente.Email,
-            Telefone = cliente.Telefone,
-            Celular = cliente.Celular,
-            Endereco = cliente.Endereco?.ToApiResponse()
-        });
-
-    }
-
-    public static EnderecoDto ToApiResponse(this Endereco endereco)
+    public static EnderecoResponseDto ToApiResponse(this Endereco endereco)
     {
         if (endereco is null) return null;
 
-        return new EnderecoDto
+        return new EnderecoResponseDto
         {
             Id = endereco.Id,
             Cep = endereco.Cep,
