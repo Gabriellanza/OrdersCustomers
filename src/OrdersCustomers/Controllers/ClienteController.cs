@@ -2,7 +2,6 @@
 using OrdersCustomers.Application.DTOs.Cliente;
 using OrdersCustomers.Application.Interfaces;
 using OrdersCustomers.Application.Mappers;
-using OrdersCustomers.Domain.Interfaces;
 
 namespace OrdersCustomers.Controllers;
 

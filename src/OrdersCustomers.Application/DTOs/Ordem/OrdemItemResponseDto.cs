@@ -1,5 +1,4 @@
 ﻿using OrdersCustomers.Application.ViewModels;
-using OrdersCustomers.Domain.Entities;
 
 namespace OrdersCustomers.Application.DTOs.Ordem;
 

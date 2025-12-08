@@ -6,10 +6,8 @@ using OrdersCustomers.Application.DTOs.Endereco;
 using OrdersCustomers.Application.Interfaces.Comum;
 using OrdersCustomers.Application.Services;
 using OrdersCustomers.Domain.Entities;
-using OrdersCustomers.Domain.Interfaces;
 using OrdersCustomers.Infra.Data.Context;
 using OrdersCustomers.Infra.Data.Repository;
-using System.Data.Entity;
 
 namespace OrdersCustomers.Tests.ClienteTests;
 public class ClienteIntegrationServiceUnitTests

@@ -1,14 +1,9 @@
-using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using Moq;
-using OrdersCustomers.Application.DTOs.Cliente;
-using OrdersCustomers.Application.DTOs.Endereco;
 using OrdersCustomers.Application.DTOs.Ordem;
 using OrdersCustomers.Application.Interfaces.Comum;
 using OrdersCustomers.Application.Services;
 using OrdersCustomers.Domain.Entities;
-using OrdersCustomers.Domain.Entities.Comum;
-using OrdersCustomers.Domain.Interfaces;
 using OrdersCustomers.Domain.Interfaces.Procedures;
 using OrdersCustomers.Domain.Interfaces.Rabbit;
 using OrdersCustomers.Infra.Data.Context;

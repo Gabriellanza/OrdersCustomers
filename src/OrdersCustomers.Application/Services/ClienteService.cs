@@ -1,8 +1,5 @@
-﻿using System.Linq.Expressions;
-using LinqKit;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using OrdersCustomers.Application.DTOs.Cliente;
-using OrdersCustomers.Application.DTOs.Endereco;
 using OrdersCustomers.Application.Interfaces;
 using OrdersCustomers.Application.Mappers;
 using OrdersCustomers.Application.Services.Comum;

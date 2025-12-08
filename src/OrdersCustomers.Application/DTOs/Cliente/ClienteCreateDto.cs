@@ -1,5 +1,4 @@
 ﻿using OrdersCustomers.Application.DTOs.Endereco;
-using OrdersCustomers.Application.ViewModels;
 
 namespace OrdersCustomers.Application.DTOs.Cliente;
 

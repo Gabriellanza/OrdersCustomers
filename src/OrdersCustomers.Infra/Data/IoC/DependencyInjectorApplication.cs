@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 using OrdersCustomers.Application.Interfaces;
 using OrdersCustomers.Application.Interfaces.Comum;
 using OrdersCustomers.Application.Services;

@@ -5,7 +5,6 @@ using System.Data;
 using Dapper;
 using Microsoft.EntityFrameworkCore;
 using OrdersCustomers.Domain.Interfaces.Procedures;
-using System.Runtime.Serialization;
 
 namespace OrdersCustomers.Infra.Data.Procedures;
 

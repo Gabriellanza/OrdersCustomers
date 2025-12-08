@@ -1,10 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OrdersCustomers.Application.DTOs.Cliente;
 using OrdersCustomers.Application.DTOs.Ordem;
 using OrdersCustomers.Application.Interfaces;
 using OrdersCustomers.Application.Mappers;
-using OrdersCustomers.Application.Services;
-using OrdersCustomers.Domain.Interfaces;
 
 namespace OrdersCustomers.Controllers;
 

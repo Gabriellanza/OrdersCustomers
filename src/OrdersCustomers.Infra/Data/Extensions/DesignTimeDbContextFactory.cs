@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
 using OrdersCustomers.Infra.Data.Context;
 
 namespace OrdersCustomers.Infra.Data.Extensions;

@@ -1,5 +1,4 @@
-﻿using OrdersCustomers.Application.DTOs.Cliente;
-using OrdersCustomers.Application.DTOs.Ordem;
+﻿using OrdersCustomers.Application.DTOs.Ordem;
 using OrdersCustomers.Domain.Entities;
 using OrdersCustomers.Domain.Entities.Rabbit;
 
