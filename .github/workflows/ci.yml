@@ -1,0 +1,57 @@
+name: .NET CI
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  build-test-lint:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        dotnet-version: [8.0.x]
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Setup .NET SDK
+      uses: actions/setup-dotnet@v3
+      with:
+        dotnet-version: ${{ matrix.dotnet-version }}
+
+    - name: Restore dependencies
+      run: dotnet restore
+
+    - name: Build solution
+      run: dotnet build --configuration Release --no-restore
+
+    - name: Run unit tests
+      run: |
+        dotnet test src/OrdersCustomers.Tests/OrdersCustomers.Tests.csproj \
+          --configuration Release \
+          --no-build \
+          --logger "trx;LogFileName=unit-tests.trx" \
+          /p:CollectCoverage=true \
+          /p:CoverletOutputFormat=cobertura
+
+    - name: Run integration tests
+      run: |
+        dotnet test src/OrdersCustomers.Tests/OrdersCustomers.IntegrationTests.csproj \
+          --configuration Release \
+          --no-build \
+          --logger "trx;LogFileName=integration-tests.trx" \
+          /p:CollectCoverage=true \
+          /p:CoverletOutputFormat=cobertura
+
+    - name: Run lint
+      run: dotnet format --verify-no-changes --verbosity minimal
+
+    - name: Upload coverage report
+      uses: actions/upload-artifact@v3
+      with:
+        name: coverage-report
+        path: '**/coverage.cobertura.xml'

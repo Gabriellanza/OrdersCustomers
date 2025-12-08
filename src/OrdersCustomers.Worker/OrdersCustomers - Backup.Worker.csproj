@@ -1,0 +1,38 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Worker">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<OutputType>Exe</OutputType>
+	
+
+	<ItemGroup>
+		<None Remove="appsettings.Development.json" />
+		<None Remove="appsettings.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<None Include="appsettings*.json">
+			<CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+			<CopyToPublishDirectory>Never</CopyToPublishDirectory>
+		</None>
+	</ItemGroup>
+
+
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Hosting" Version="2.3.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore" Version="8.0.22" />
+		<PackageReference Include="Microsoft.Extensions.Configuration" Version="8.0.0" />
+		<PackageReference Include="RabbitMQ.Client" Version="7.2.0" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\OrdersCustomers.Application\OrdersCustomers.Application.csproj" />
+		<ProjectReference Include="..\OrdersCustomers.Domain\OrdersCustomers.Domain.csproj" />
+	</ItemGroup>
+
+</Project>

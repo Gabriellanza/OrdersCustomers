@@ -1,0 +1,51 @@
+<!--?xml version="1.0" encoding="utf-8"?-->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 80" width="240" height="80" role="img" aria-labelledby="title desc">
+  <title id="title">OrdersCustomers — logo</title>
+  <desc id="desc">Monogram OC with network nodes and a small lock, modern rounded style for OrdersCustomers project.</desc>
+
+  <defs>
+    <linearGradient id="g1" x1="0" x2="1">
+      <stop offset="0" stop-color="#2563EB"></stop>
+      <stop offset="1" stop-color="#06B6D4"></stop>
+    </linearGradient>
+
+    <filter id="f-shadow" x="-50%" y="-50%" width="200%" height="200%">
+      <feDropShadow dx="0" dy="2" stdDeviation="3" flood-color="#000" flood-opacity="0.12"></feDropShadow>
+    </filter>
+
+    <style>
+      .brand-text { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; font-weight: 700; fill: #0f172a; font-size:18px; letter-spacing:0.4px; }
+      .tagline { font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial; font-weight: 500; fill: #475569; font-size:11px; }
+    </style>
+  </defs>
+
+  <!-- Symbol background circle -->
+  <g transform="translate(12,12)">
+    <rect x="0" y="0" width="56" height="56" rx="12" fill="url(#g1)" filter="url(#f-shadow)"></rect>
+    <!-- O letter -->
+    <circle cx="22" cy="28" r="13" fill="rgba(255,255,255,0.06)"></circle>
+    <path d="M8 28a14 14 0 1 0 28 0 14 14 0 1 0 -28 0" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+    <!-- C letter (cut) -->
+    <path d="M36 20a8 8 0 1 1 0 16" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+
+    <!-- connection nodes -->
+    <g transform="translate(8,6)" fill="#fff" opacity="0.9">
+      <circle cx="38" cy="8" r="2.2"></circle>
+      <circle cx="44" cy="20" r="1.8"></circle>
+      <circle cx="30" cy="26" r="1.6"></circle>
+      <path d="M38 8 L44 20 L30 26" stroke="#ffffff" stroke-opacity="0.35" stroke-width="1.4" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+    </g>
+
+    <!-- small lock (auth) -->
+    <g transform="translate(36,2)">
+      <rect x="0" y="22" width="14" height="10" rx="2" fill="#fff" opacity="0.95"></rect>
+      <path d="M4 22v-4a4 4 0 0 1 8 0v4" stroke="#06B6D4" stroke-width="1.6" fill="none" stroke-linecap="round" stroke-linejoin="round"></path>
+    </g>
+  </g>
+
+  <!-- Brand text -->
+  <g transform="translate(86,24)">
+    <text class="brand-text">OrdersCustomers</text>
+    <text x="0" y="22" class="tagline">API · Worker · RabbitMQ · Auth</text>
+  </g>
+</svg>

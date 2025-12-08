@@ -1,0 +1,46 @@
+﻿using Microsoft.AspNetCore.Mvc;
+using OrdersCustomers.Application.DTOs.Cliente;
+using OrdersCustomers.Application.DTOs.Ordem;
+using OrdersCustomers.Application.Interfaces;
+using OrdersCustomers.Application.Mappers;
+using OrdersCustomers.Application.Services;
+using OrdersCustomers.Domain.Interfaces;
+
+namespace OrdersCustomers.Controllers;
+
+[ApiController]
+[Route("api/[controller]")]
+public class OrdemController : ApiBaseController
+{
+    private readonly IOrdemService _ordemService;
+
+    public OrdemController(IServiceProvider serviceProvider, IOrdemService ordemService) : base(serviceProvider)
+    {
+        _ordemService = ordemService;
+    }
+
+    [HttpGet("{numeroOrdem}")]
+    public async Task<IActionResult> ObterPorId(string numeroOrdem)
+    {
+        var ret = await _ordemService.ObterPorNumeroOrdem(numeroOrdem);
+
+        return Response(ret.ToApiResponse());
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> ListarTodos()
+    {
+        var ret = await _ordemService.ListarTodas();
+
+        return ret is not null ? Response(ret) : NoContent();
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Criar([FromBody] OrdemCreateDto request)
+    {
+        var ret = await _ordemService.Criar(request);
+
+        return ret?.NumeroOrdem is not null ? CreateResponse(ret) : Response(null);
+    }
+
+}
