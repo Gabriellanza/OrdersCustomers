@@ -1,6 +1,5 @@
 ﻿using LegacySimulator.DAL;
 using LegacySimulator.INFO;
-using static LegacySimulator.BLL.OrdemBll;
 
 namespace LegacySimulator.BLL;
 

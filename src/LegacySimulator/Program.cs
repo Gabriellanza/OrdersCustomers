@@ -1,6 +1,4 @@
 ﻿using LegacySimulator.BLL;
-using LegacySimulator.DAL;
-using LegacySimulator.INFO;
 
 namespace LegacySimulator;
 
