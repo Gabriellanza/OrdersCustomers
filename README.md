@@ -30,34 +30,41 @@ docker compose up --build
 Front-end disponível em: http://localhost:3000
 
 
-## 🚀 Informações Adicionais
-
+🚀 Informações Adicionais
 📚 Coleção Postman
-Coleção disponível na pasta do Git.
-Possui todos os endpoints da API com exemplos de requisição.
+
+Coleção disponível na pasta do repositório, contendo todos os endpoints da API com exemplos completos de requisições e respostas.
 
 🔑 Autenticação
-Implementada via OAuth2 / Auth0
-Todos os endpoints da API requerem token válido.
-Front-end já configurado para login automático via Auth0.
+Autenticação implementada via OAuth2 com Auth0.
+Todos os endpoints da API exigem token válido.
+O front-end já está configurado para realizar login automático utilizando o Auth0.
 
 💾 Banco de Dados
-Migrations automáticas criam tabelas, índices e procedure.
-Scripts DDL e seeds disponíveis em database/.
-Procedure é executada pelo worker ao processar eventos de ordem.
+O banco de dados é provisionado e mantido automaticamente via migrations, responsáveis pela criação de:
+Tabelas
+Índices
+Procedures armazenadas
+A procedure principal de processamento de ordens é executada de forma assíncrona pelo Worker, através do consumo de eventos do RabbitMQ.
+
+⚙ Worker e Processamento Assíncrono
+O Worker atua como um consumer do RabbitMQ, sendo responsável por:
+Consumir eventos de criação/atualização de ordens
+Executar a stored procedure no banco de dados
+Esse fluxo torna a aplicação event-driven, com comunicação totalmente orientada a eventos.
 
 🛠 CI/CD
-Pipeline de GitHub Actions:
+Pipeline configurado via GitHub Actions, com as seguintes etapas:
 Build da API
-Execução de testes
-Lint do front-end e back-end
+Execução de testes automatizados
+Lint do front-end
+Lint do back-end
 
-
-⚙ Observações
-Front-end na porta 3000, API na porta 5000.
-Worker consome eventos automaticamente do RabbitMQ.
-Banco é criado e atualizado automaticamente via migrations.
-Fluxo de ordem é event-driven.
-Autenticação segura via OAuth2.
-
+⚙ Observações Técnicas
+Front-end disponível na porta 3000
+API disponível na porta 5000
+Worker consome eventos automaticamente via RabbitMQ
+Banco de dados criado e atualizado automaticamente por migrations
+Fluxo de ordens totalmente event-driven
+Autenticação segura utilizando OAuth2
 
