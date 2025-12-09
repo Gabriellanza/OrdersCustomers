@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import axios from 'axios';
+import toast from 'react-hot-toast';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const api = axios.create({
@@ -23,8 +24,24 @@ export const useAxios = () => {
             (error) => Promise.reject(error)
         );
 
+        const responseInterceptor = api.interceptors.response.use(
+            (response) => response,
+            (error) => {
+                if (error.response && error.response.status === 400) {
+                    const errors = error.response.data.errors;
+                    if (errors && Array.isArray(errors)) {
+                        errors.forEach(err => {
+                            toast.error(err.value);
+                        });
+                    }
+                }
+                return Promise.reject(error);
+            }
+        );
+
         return () => {
             api.interceptors.request.eject(requestInterceptor);
+            api.interceptors.response.eject(responseInterceptor);
         };
     }, [getAccessTokenSilently]);
 

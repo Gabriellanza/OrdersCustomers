@@ -1,5 +1,16 @@
 services:
 
+  frontend:
+    container_name: orders_customers_frontend
+    build:
+      context: ./frontend-react
+      dockerfile: Dockerfile
+    ports:
+      - "3000:80"
+    depends_on:
+      api:
+        condition: service_started
+
   rabbitmq:
     image: rabbitmq:3-management
     container_name: orders_costumers_rabbitmq
