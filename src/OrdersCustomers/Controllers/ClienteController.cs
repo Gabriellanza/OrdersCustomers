@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OrdersCustomers.Application.DTOs.Cliente;
 using OrdersCustomers.Application.Interfaces;
 using OrdersCustomers.Application.Mappers;
@@ -6,6 +7,7 @@ using OrdersCustomers.Application.Mappers;
 namespace OrdersCustomers.Controllers;
 
 [ApiController]
+[Authorize]
 [Route("api/[controller]")]
 public class ClienteController : ApiBaseController
 {

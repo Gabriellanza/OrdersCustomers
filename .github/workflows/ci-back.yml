@@ -40,23 +40,19 @@ jobs:
           dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: |
-          cd src
-          dotnet restore
+        working-directory: src/OrdersCustomers
+        run: dotnet restore OrdersCustomers.sln
 
       - name: Build
-        run: |
-          cd src
-          dotnet build --no-restore --configuration Release
+        working-directory: src/OrdersCustomers
+        run: dotnet build OrdersCustomers.sln --no-restore --configuration Release
 
       - name: Run Unit Tests
-        run: |
-          cd src
-          dotnet test OrdersCustomers.Tests --no-build --configuration Release --verbosity normal
+        working-directory: src/OrdersCustomers
+        run: dotnet test OrdersCustomers.Tests/OrdersCustomers.Tests.csproj --no-build --configuration Release --verbosity normal
 
       - name: Run Integration Tests
-        run: |
-          cd src
-          dotnet test OrdersCustomers.Tests --no-build --configuration Release --verbosity normal
+        working-directory: src/OrdersCustomers
+        run: dotnet test OrdersCustomers.Tests/OrdersCustomers.Tests.csproj --no-build --configuration Release --verbosity normal
         env:
           ConnectionStrings__DefaultConnection: "Host=localhost;Port=5432;Database=OrdersCustomers;Username=admin;Password=admin"
