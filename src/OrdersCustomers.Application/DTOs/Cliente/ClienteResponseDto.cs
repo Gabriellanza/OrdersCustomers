@@ -17,5 +17,7 @@ public class ClienteResponseDto : ViewModelBase
 
     public string Celular { get; set; }
 
+    public bool? Ativo { get; set; }
+
     public EnderecoResponseDto  Endereco { get; set; }
 }

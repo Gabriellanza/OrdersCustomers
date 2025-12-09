@@ -27,6 +27,7 @@ public static class ClienteMapper
             Email = clienteObj.Email,
             Telefone = clienteObj.Telefone,
             Celular = clienteObj.Celular,
+            Ativo = clienteObj.Ativo,
             Endereco = clienteObj.Endereco?.ToApiResponse()
         };
     }

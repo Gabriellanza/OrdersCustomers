@@ -7,6 +7,8 @@ public class OrdemResponseDto : ViewModelBase
 {
     public Guid Id { get; set; }
 
+    public Guid ClienteId { get; set; }
+
     public string NumeroOrdem { get; set; }
 
     public DateTime? DataConclusao { get; set; }

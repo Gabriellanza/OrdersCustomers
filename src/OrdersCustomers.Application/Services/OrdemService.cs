@@ -47,7 +47,7 @@ public class OrdemService : ServiceBase<Ordem>, IOrdemService
         var ordemList = await GetList(x => x.Ativo, include: query => query
             .Include(x => x.Itens));
 
-        return ordemList.ToList().ToApiResponse();
+        return ordemList?.ToList().ToApiResponse();
     }
 
 

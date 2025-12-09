@@ -23,6 +23,7 @@ public static class OrdemMapper
         return new OrdemResponseDto
         {
             Id = ordemObj.Id,
+            ClienteId = ordemObj.ClienteId,
             NumeroOrdem = ordemObj.NumeroOrdem.ToString(),
             DataConclusao = ordemObj.DataCriacao,
             Status = ordemObj.Status,

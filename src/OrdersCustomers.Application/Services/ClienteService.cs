@@ -24,8 +24,14 @@ public class ClienteService : ServiceBase<Cliente>, IClienteService
             return null;
         }
 
-        var cliente = await GetSingle(x => x.Id == id && x.Ativo, include: query => query
+        var cliente = await GetSingle(x => x.Id == id, include: query => query
                 .Include(x => x.Endereco));
+
+        if (cliente?.Ativo == false)
+        {
+            NewNotification("Cliente", "O Cliente está inativo");
+            return null;
+        }
 
         if (cliente is null)
         {
@@ -38,7 +44,7 @@ public class ClienteService : ServiceBase<Cliente>, IClienteService
 
     public async Task<IEnumerable<ClienteResponseDto>> ListarTodos()
     {
-        var clienteList = await GetList(x => x.Ativo, include: query => query
+        var clienteList = await GetList(include: query => query
             .Include(x => x.Endereco));
 
         return clienteList.ToList().ToApiResponse();
