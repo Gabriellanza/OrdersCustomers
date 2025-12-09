@@ -1,0 +1,62 @@
+name: CI Back
+
+on:
+  push:
+    branches: [ main, development ]
+    paths:
+      - 'src/**'
+      - '.github/workflows/ci-back.yml'
+  pull_request:
+    branches: [ main, development ]
+    paths:
+      - 'src/**'
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: admin
+          POSTGRES_PASSWORD: admin
+          POSTGRES_DB: OrdersCustomers
+        ports:
+          - 5433:5432
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 5
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v4
+        with:
+          dotnet-version: '8.0.x'
+
+      - name: Restore dependencies
+        run: |
+          cd src
+          dotnet restore
+
+      - name: Build
+        run: |
+          cd src
+          dotnet build --no-restore --configuration Release
+
+      - name: Run Unit Tests
+        run: |
+          cd src
+          dotnet test OrdersCustomers.Tests --no-build --configuration Release --verbosity normal
+
+      - name: Run Integration Tests
+        run: |
+          cd src
+          dotnet test OrdersCustomers.Tests --no-build --configuration Release --verbosity normal
+        env:
+          ConnectionStrings__DefaultConnection: "Host=localhost;Port=5432;Database=OrdersCustomers;Username=admin;Password=admin"
