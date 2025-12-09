@@ -69,7 +69,7 @@ const OrderList = () => {
 
     const filteredOrders = orders.filter(o =>
         (o.numeroOrdem?.toString() || '').includes(searchTerm) ||
-        o.status?.toLowerCase().includes(searchTerm.toLowerCase())
+        (o.descricaoStatus?.toLowerCase() || '').includes(searchTerm.toLowerCase())
     );
 
     return (

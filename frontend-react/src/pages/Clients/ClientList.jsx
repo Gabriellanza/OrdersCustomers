@@ -95,6 +95,7 @@ const ClientList = () => {
                                 <th className="p-3">CPF/CNPJ</th>
                                 <th className="p-3">Email</th>
                                 <th className="p-3">Cidade/Estado</th>
+                                <th className="p-3">Ativo</th>
                                 <th className="p-3 text-right">Ações</th>
                             </tr>
                         </thead>
@@ -106,12 +107,13 @@ const ClientList = () => {
                                         <td className="p-3"><Skeleton className="h-5 w-24" /></td>
                                         <td className="p-3"><Skeleton className="h-5 w-48" /></td>
                                         <td className="p-3"><Skeleton className="h-5 w-24" /></td>
+                                        <td className="p-3"><Skeleton className="h-5 w-16" /></td>
                                         <td className="p-3"><Skeleton className="h-5 w-20 ml-auto" /></td>
                                     </tr>
                                 ))
                             ) : filteredClients.length === 0 ? (
                                 <tr>
-                                    <td colSpan="5" className="p-8 text-center text-gray-500">
+                                    <td colSpan="6" className="p-8 text-center text-gray-500">
                                         Nenhum cliente encontrado.
                                     </td>
                                 </tr>
@@ -123,6 +125,14 @@ const ClientList = () => {
                                         <td className="p-3">{client.email}</td>
                                         <td className="p-3">
                                             {client.endereco ? `${client.endereco.cidade}/${client.endereco.estado}` : '-'}
+                                        </td>
+                                        <td className="p-3">
+                                            <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${client.ativo
+                                                    ? 'bg-green-100 text-green-700'
+                                                    : 'bg-red-100 text-red-700'
+                                                }`}>
+                                                {client.ativo ? 'Ativo' : 'Inativo'}
+                                            </span>
                                         </td>
                                         <td className="p-3 text-right space-x-2">
                                             <button

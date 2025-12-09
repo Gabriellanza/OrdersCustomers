@@ -126,7 +126,7 @@ const OrderForm = ({ isOpen, onClose, onSuccess, initialData, viewOnly }) => {
                         disabled={!!initialData || viewOnly}
                     >
                         <option value="">Selecione um Cliente</option>
-                        {clients.map(client => (
+                        {clients.filter(client => initialData ? true : client.ativo).map(client => (
                             <option key={client.id} value={client.id}>
                                 {client.nome} - {client.cpfCnpj}
                             </option>
@@ -146,7 +146,7 @@ const OrderForm = ({ isOpen, onClose, onSuccess, initialData, viewOnly }) => {
 
                     <div className="space-y-3 bg-gray-50 p-4 rounded-lg border border-gray-200">
                         {formData.items.length === 0 && (
-                            <p className="text-sm text-gray-500 text-center py-4">No items added.</p>
+                            <p className="text-sm text-gray-500 text-center py-4">Nenhum item adicionado.</p>
                         )}
                         {formData.items.map((item, index) => (
                             <div key={index} className={`grid ${viewOnly ? 'grid-cols-[3fr_1fr_1.5fr]' : 'grid-cols-[3fr_1fr_1.5fr_auto]'} gap-3 items-end`}>
