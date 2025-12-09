@@ -1,6 +1,8 @@
 ﻿using OrdersCustomers.Application.DTOs.Ordem;
 using OrdersCustomers.Domain.Entities;
 using OrdersCustomers.Domain.Entities.Rabbit;
+using System.ComponentModel;
+using System.Reflection;
 
 namespace OrdersCustomers.Application.Mappers;
 
@@ -23,8 +25,9 @@ public static class OrdemMapper
         {
             Id = ordemObj.Id,
             NumeroOrdem = ordemObj.NumeroOrdem.ToString(),
-            DataConclusao = ordemObj.DataConclusao,
+            DataConclusao = ordemObj.DataCriacao,
             Status = ordemObj.Status,
+            DescricaoStatus = GetEnumDescription(ordemObj.Status),
             ValorTotal = ordemObj.ValorTotal,
             Items = ordemObj.Itens.ToApiResponse()
         };
@@ -68,5 +71,17 @@ public static class OrdemMapper
             Quantidade = itemOrdem.Quantidade,
             ValorUnitario = itemOrdem.ValorUnitario
         }).ToList();
+    }
+
+    public static string GetEnumDescription<T>(T enumValue) where T : Enum
+    {
+        var fi = enumValue.GetType().GetField(enumValue.ToString());
+        if (fi != null)
+        {
+            var attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+            return (attributes.Length > 0) ? attributes[0].Description : enumValue.ToString();
+        }
+
+        return enumValue.ToString();
     }
 }

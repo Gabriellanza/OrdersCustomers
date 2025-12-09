@@ -48,11 +48,11 @@ jobs:
         run: dotnet build OrdersCustomers.sln --no-restore --configuration Release
 
       - name: Run Unit Tests
-        working-directory: src/OrdersCustomers
+        working-directory: src
         run: dotnet test OrdersCustomers.Tests/OrdersCustomers.Tests.csproj --no-build --configuration Release --verbosity normal
 
       - name: Run Integration Tests
-        working-directory: src/OrdersCustomers
+        working-directory: src
         run: dotnet test OrdersCustomers.Tests/OrdersCustomers.Tests.csproj --no-build --configuration Release --verbosity normal
         env:
           ConnectionStrings__DefaultConnection: "Host=localhost;Port=5432;Database=OrdersCustomers;Username=admin;Password=admin"

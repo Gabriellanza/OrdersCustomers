@@ -13,6 +13,8 @@ public class OrdemResponseDto : ViewModelBase
 
     public OrdemStatus Status { get; set; }
 
+    public string DescricaoStatus { get; set; }
+
     public decimal ValorTotal { get; set; }
 
     public List<OrdemItemResponseDto> Items { get; set; }
