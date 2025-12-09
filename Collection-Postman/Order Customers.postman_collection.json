@@ -1,0 +1,320 @@
+{
+	"info": {
+		"_postman_id": "5c83e443-4d7f-4aad-bf31-06e2a638817a",
+		"name": "Order Customers",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25928682"
+	},
+	"item": [
+		{
+			"name": "Cliente",
+			"item": [
+				{
+					"name": "Listar Clientes",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Cliente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obter Cliente - ID",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Cliente/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Cliente",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Deletar Cliente (lógico)",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Cliente/:id",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Cliente",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": ""
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Cliente",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"cpfCnpj\": \"42000933831\",\r\n  \"nome\": \"Gabriel Lanza\",\r\n  \"email\": \"gabriel-lanza21@outlook.com\",\r\n  \"telefone\": \"\",\r\n  \"celular\": \"18981179493\",\r\n  \"endereco\": {\r\n    \"cep\": \"19160000\",\r\n    \"logradouro\": \"rua Teste\",\r\n    \"numero\": \"2222\",\r\n    \"bairro\": \"bairro teste\",\r\n    \"cidade\": \"cidade teste\",\r\n    \"estado\": \"SP\"\r\n  }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Cliente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Cliente"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Alterar Cliente",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"92d4f13e-9cb7-4b78-8248-5979a7047238\",\r\n    \"cpfCnpj\": \"42000933831\",\r\n    \"nome\": \"Gabriel Lanza Alterado\",\r\n    \"email\": \"gabriel-lanza21@outlook.com\",\r\n    \"telefone\": \"\",\r\n    \"celular\": \"\",\r\n    \"endereco\": {\r\n        \"id\": \"7d5407d6-a191-4951-886f-03d6f4a3db00\",\r\n        \"cep\": \"19160000\",\r\n        \"logradouro\": \"TTTT\",\r\n        \"numero\": \"122\",\r\n        \"bairro\": \"Vila\",\r\n        \"cidade\": \"Alvares Machado\",\r\n        \"estado\": \"SP\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Cliente",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Cliente"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ordem",
+			"item": [
+				{
+					"name": "Listar Ordem",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Ordem",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Ordem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Obter Ordem - Numero",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Ordem/:numeroOrdem",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Ordem",
+								":numeroOrdem"
+							],
+							"variable": [
+								{
+									"key": "numeroOrdem",
+									"value": "639008382553683273"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Criar Ordem",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"clienteId\": \"ba088e50-e2f6-459d-86c9-7ec17d15b78d\",\r\n  \"items\": [\r\n    {\r\n      \"nomeProduto\": \"Iphone 15\",\r\n      \"quantidade\": 2,\r\n      \"valorUnitario\": 4000\r\n    }\r\n  ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:5000/api/Ordem",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Ordem"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Finalizar Ordem - Já utilizado no Criar (Rabbit)",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:5000/api/Ordem/Finalizar/:numeroOrdem",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "5000",
+							"path": [
+								"api",
+								"Ordem",
+								"Finalizar",
+								":numeroOrdem"
+							],
+							"variable": [
+								{
+									"key": "numeroOrdem",
+									"value": "639008382553683273"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": [
+			{
+				"key": "token",
+				"value": "{{access_token}}",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					"pm.sendRequest({\r",
+					"    url: 'https://dev-spb0upyh2a4r4l2r.us.auth0.com/oauth/token',\r",
+					"    method: 'POST',\r",
+					"    header: {\r",
+					"        'Content-Type': 'application/json'\r",
+					"    },\r",
+					"    body: {\r",
+					"        mode: 'raw',\r",
+					"        raw: JSON.stringify({\r",
+					"            client_id: '6lkJN5rKDXKgU9wTmZqahiG7UwAyy4Lv',\r",
+					"            client_secret: 'ILvX2_LHJQVGoUHeDcnwpxzw0w5I4Ba840voa1T7hLWRj7_z8l-jw9TK7w0T7dA6',\r",
+					"            audience: 'https://localhost:44335/',\r",
+					"            grant_type: 'client_credentials'\r",
+					"        })\r",
+					"    }\r",
+					"}, function (err, res) {\r",
+					"    if (err) {\r",
+					"        console.log('Erro ao obter token:', err);\r",
+					"    } else {\r",
+					"        const jsonData = res.json();\r",
+					"        pm.environment.set('access_token', jsonData.access_token);\r",
+					"        console.log('Token obtido:', jsonData.access_token);\r",
+					"    }\r",
+					"});\r",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"requests": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "access_token",
+			"value": ""
+		}
+	]
+}
