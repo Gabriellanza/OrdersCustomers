@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F6883A05-C3E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrdersCustomers.Tests", "..\OrdersCustomers.Tests\OrdersCustomers.Tests.csproj", "{E3C33A68-66DF-4A39-BE96-AA423A699648}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LegacySimulator", "..\LegacySimulator\LegacySimulator.csproj", "{1174525B-BE79-4736-A059-03D511A0D5E5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,6 +49,10 @@ Global
 		{E3C33A68-66DF-4A39-BE96-AA423A699648}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3C33A68-66DF-4A39-BE96-AA423A699648}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3C33A68-66DF-4A39-BE96-AA423A699648}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1174525B-BE79-4736-A059-03D511A0D5E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1174525B-BE79-4736-A059-03D511A0D5E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1174525B-BE79-4736-A059-03D511A0D5E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1174525B-BE79-4736-A059-03D511A0D5E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -58,6 +64,7 @@ Global
 		{0B460B4D-0D97-4710-8068-5CCBEC553755} = {F6883A05-C3ED-48D8-8D96-EF25783136C9}
 		{7421683A-30DC-4C33-A7FD-8475C8C4D10C} = {F6883A05-C3ED-48D8-8D96-EF25783136C9}
 		{E3C33A68-66DF-4A39-BE96-AA423A699648} = {F6883A05-C3ED-48D8-8D96-EF25783136C9}
+		{1174525B-BE79-4736-A059-03D511A0D5E5} = {F6883A05-C3ED-48D8-8D96-EF25783136C9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {780EC584-069F-4946-A542-6EA5FD5302B7}

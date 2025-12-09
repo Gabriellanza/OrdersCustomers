@@ -2,7 +2,6 @@
 using OrdersCustomers.Domain.Entities;
 using OrdersCustomers.Domain.Entities.Rabbit;
 using System.ComponentModel;
-using System.Reflection;
 
 namespace OrdersCustomers.Application.Mappers;
 
