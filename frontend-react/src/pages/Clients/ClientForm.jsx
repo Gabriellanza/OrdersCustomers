@@ -31,6 +31,7 @@ const ClientForm = ({ isOpen, onClose, onSuccess, initialData }) => {
     useEffect(() => {
         if (initialData) {
             setFormData({
+                id: initialData.id || '',
                 cpfCnpj: initialData.cpfCnpj || '',
                 nome: initialData.nome || '',
                 email: initialData.email || '',
@@ -68,7 +69,7 @@ const ClientForm = ({ isOpen, onClose, onSuccess, initialData }) => {
         setLoading(true);
         try {
             if (initialData?.id) {
-                await updateClient(api, initialData.id, formData);
+                await updateClient(api, formData);
                 toast.success('Cliente alterado com sucesso');
             } else {
                 await createClient(api, formData);

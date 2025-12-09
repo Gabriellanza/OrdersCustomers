@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Plus, Pencil, Trash2, Search } from 'lucide-react';
+import { Plus, Pencil, Trash2, Search, Eye } from 'lucide-react';
 import { useAxios } from '../../hooks/useAxios';
 import { getOrders, deleteOrder } from '../../services/orderService';
 import OrderForm from './OrderForm';
@@ -13,6 +13,7 @@ const OrderList = () => {
     const [orders, setOrders] = useState([]);
     const [loading, setLoading] = useState(true);
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isViewOnly, setIsViewOnly] = useState(false);
     const [editingOrder, setEditingOrder] = useState(null);
     const [searchTerm, setSearchTerm] = useState('');
 
@@ -48,13 +49,21 @@ const OrderList = () => {
         }
     };
 
+    const handleView = (order) => {
+        setEditingOrder(order);
+        setIsViewOnly(true);
+        setIsModalOpen(true);
+    };
+
     const handleEdit = (order) => {
         setEditingOrder(order);
+        setIsViewOnly(false);
         setIsModalOpen(true);
     };
 
     const handleCreate = () => {
         setEditingOrder(null);
+        setIsViewOnly(false);
         setIsModalOpen(true);
     };
 
@@ -120,7 +129,7 @@ const OrderList = () => {
                                         <td className="p-3 font-medium text-gray-900">#{order.numeroOrdem}</td>
                                         <td className="p-3">
                                             <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-700">
-                                                {order.status}
+                                                {order.descricaoStatus}
                                             </span>
                                         </td>
                                         <td className="p-3">${order.valorTotal?.toFixed(2)}</td>
@@ -130,16 +139,10 @@ const OrderList = () => {
                                         <td className="p-3 text-right space-x-2">
                                             {/* Only allow edit/delete if status allows it - assumed logic, but keeping default for now */}
                                             <button
-                                                onClick={() => handleEdit(order)}
+                                                onClick={() => handleView(order)}
                                                 className="text-blue-600 hover:text-blue-800 p-1 rounded hover:bg-blue-50"
                                             >
-                                                <Pencil size={18} />
-                                            </button>
-                                            <button
-                                                onClick={() => handleDelete(order.id)}
-                                                className="text-red-600 hover:text-red-800 p-1 rounded hover:bg-red-50"
-                                            >
-                                                <Trash2 size={18} />
+                                                <Eye size={18} />
                                             </button>
                                         </td>
                                     </tr>
@@ -155,6 +158,7 @@ const OrderList = () => {
                 onClose={() => setIsModalOpen(false)}
                 onSuccess={fetchOrders}
                 initialData={editingOrder}
+                viewOnly={isViewOnly}
             />
         </div>
     );
