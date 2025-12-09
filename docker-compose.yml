@@ -75,7 +75,7 @@ services:
       POSTGRES_PASSWORD: admin
       POSTGRES_DB: OrdersCustomers
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U admin"]
+      test: ["CMD-SHELL", "pg_isready -U admin -d OrdersCustomers"]
       interval: 5s
       timeout: 5s
       retries: 5
