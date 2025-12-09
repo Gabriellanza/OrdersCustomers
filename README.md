@@ -21,12 +21,20 @@ Documentação do projeto desenvolvido com front-end, back-end, worker e serviç
 
 ### Passos
 
-git clone https://github.com/Gabriellanza/OrdersCustomers.git
+git clone: https://github.com/Gabriellanza/OrdersCustomers.git
+
 cd SEU-REPO
+
 docker compose up --build
+
 Front-end disponível em: http://localhost:3000
 
 
+## 🚀 Informações Adicionais
+
+📚 Coleção Postman
+Coleção disponível na pasta do Git.
+Possui todos os endpoints da API com exemplos de requisição.
 
 🔑 Autenticação
 Implementada via OAuth2 / Auth0
